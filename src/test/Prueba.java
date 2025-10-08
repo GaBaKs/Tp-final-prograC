@@ -1,3 +1,8 @@
+import clinica.modelo.medicos.Clinica;
+import clinica.modelo.medicos.IMedico;
+import clinica.patrones.decorator.Magister;
+import clinica.patrones.decorator.DecoratorPosgrado;
+import clinica.patrones.decorator.Permanente;
 
 public class Prueba {
 
@@ -14,7 +19,7 @@ public class Prueba {
 		System.out.println(DP.honorario());
 		
 		System.out.println("clinico-magister-permanente");
-		Decorator_Posgrado DP2=new Magister(m);
+		DecoratorPosgrado DP2=new Magister(m);
 		IMedico DC=new Permanente(DP2);
 		System.out.println(DC.honorario());
 		
