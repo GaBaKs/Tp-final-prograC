@@ -30,6 +30,8 @@ public class Nino extends Paciente {
         }
 
 
+    @Override
+    public void tipoPaciente() {
 
-
+    }
 }

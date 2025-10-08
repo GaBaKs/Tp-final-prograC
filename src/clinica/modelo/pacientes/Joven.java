@@ -29,4 +29,9 @@ public class Joven  extends Paciente {
     public Joven(String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica) {
         super(dni,n_A,domicilio,ciudad,telefono,numhistclinica);
     }
+
+    @Override
+    public void tipoPaciente() {
+
+    }
 }
