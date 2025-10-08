@@ -1,15 +1,15 @@
 package clinica.modelo.facturacion;
 
 import clinica.modelo.habitacion.Habitacion;
-import clinica.modelo.medicos.Medico;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.medicos.Medico;
+import clinica.modelo.personas.pacientes.Paciente;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Factura {
-    private static int contador = 1;
+    private static int nfactura = 0;
     private int numero;
     private LocalDate fechaIngreso;
     private LocalDate fechaEgreso;
@@ -21,7 +21,7 @@ public class Factura {
     private double total;
 
     public Factura(Paciente paciente, LocalDate ingreso, LocalDate egreso) {
-        this.numero = contador++;
+        this.numero = nfactura++;
         this.paciente = paciente;
         this.fechaIngreso = ingreso;
         this.fechaEgreso = egreso;

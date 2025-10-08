@@ -1,6 +1,6 @@
 package clinica.modelo.facturacion;
 
-import clinica.modelo.medicos.Medico;
+import clinica.modelo.personas.medicos.Medico;
 
 import java.text.DecimalFormat;
 

@@ -2,16 +2,26 @@ package clinica.modulos.ingreso;
 
 import clinica.modelo.habitacion.Habitacion;
 import clinica.modelo.internacion.Internacion;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.pacientes.Paciente;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.time.LocalDate;
 
 public class AtencionPacientes {
 	private int cont=0;
 	SalaEsperaPrivada salaesperaprivada;
-	Patio patio;
+	LinkedList<Paciente> patio;
     private Internacion internacion;
     private Paciente paciente;
+    private Queue<Paciente> listaEspera;// Solo puede haber un paciente// Pacientes en espera afuera
+
+    public void AtencionPacientes() {
+        listaEspera = new LinkedList<Paciente>();
+        patio = new LinkedList<Paciente>();
+        salaesperaprivada = null;
+    }
+
 
     public int numeroOrden()
 	{
@@ -39,15 +49,18 @@ public class AtencionPacientes {
 
             if (ganador!=actual)
                 salaesperaprivada.setPaciente(ganador);
-            patio.appendPaciente(perdedor);
+            patio.addLast(perdedor);
 
 		}
 	}
-	public AtencionPacientes() {
-		
-		
-	}
 
+    public Queue<Paciente> getPacientesPatio() {
+        return patio;
+    }
+
+    public Queue<Paciente> getListaEspera() {
+        return listaEspera;
+    }
 
     public void internar(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
         this.internacion = new Internacion(habitacion, fechaIngreso, paciente);

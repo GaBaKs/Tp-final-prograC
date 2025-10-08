@@ -1,6 +1,6 @@
 package clinica.patrones.decorator;
 
-import clinica.modelo.medicos.IMedico;
+import clinica.modelo.personas.medicos.IMedico;
 
 public abstract class DecoratorContratacion implements IMedico{
     IMedico encapsuladoPosgrado;

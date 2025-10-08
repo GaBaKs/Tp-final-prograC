@@ -1,5 +1,7 @@
-import clinica.modelo.medicos.Clinica;
-import clinica.modelo.medicos.IMedico;
+package test;
+
+import clinica.modelo.personas.medicos.Clinica;
+import clinica.modelo.personas.medicos.IMedico;
 import clinica.patrones.decorator.Magister;
 import clinica.patrones.decorator.DecoratorPosgrado;
 import clinica.patrones.decorator.Permanente;
@@ -8,7 +10,7 @@ public class Prueba {
 
 	public static void main(String[] args) {
 		
-		IMedico m=new Clinica("45290972","octavio laz","echeverria","mar del plata",123,4494935);
+		IMedico m=new Clinica("45290972","octavio laz","echeverria","mar del plata",123,4494935,'clinica');
 		
 		
 		System.out.println("clinico");

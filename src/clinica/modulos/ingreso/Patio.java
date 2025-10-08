@@ -1,13 +1,14 @@
 package clinica.modulos.ingreso;
 
 import java.util.ArrayList;
-import clinica.modelo.pacientes.Paciente;
+import java.util.Queue;
+
+import clinica.modelo.personas.pacientes.Paciente;
 
 
 public class Patio {
-
-	private ArrayList<Paciente> patio= new ArrayList<>();
-	
+    //deberiamos usar una coleccion
+    private Queue<Paciente> patio;
 	
 	
 	public void appendPaciente(Paciente p)

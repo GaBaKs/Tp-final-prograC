@@ -1,7 +1,7 @@
 package clinica.modelo.habitacion;
 
 
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.pacientes.Paciente;
 
 public abstract class Habitacion {
     protected int numero;

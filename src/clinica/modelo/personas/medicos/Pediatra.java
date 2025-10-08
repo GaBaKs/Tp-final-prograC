@@ -1,4 +1,4 @@
-package clinica.modelo.medicos;
+package clinica.modelo.personas.medicos;
 
 public class Pediatra extends Medico {
 

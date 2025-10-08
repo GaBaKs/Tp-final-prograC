@@ -1,7 +1,7 @@
 package clinica.patrones.facade;
-import clinica.modelo.medicos.Medico;
+import clinica.modelo.personas.medicos.Medico;
 import clinica.modulos.ingreso.AtencionPacientes;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.pacientes.Paciente;
 import java.util.ArrayList;
 public class Sistema {
 	

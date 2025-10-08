@@ -1,4 +1,4 @@
-package clinica.modelo.pacientes;
+package clinica.modelo.personas.pacientes;
 
 public class Nino extends Paciente {
 

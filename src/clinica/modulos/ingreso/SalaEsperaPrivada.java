@@ -1,9 +1,9 @@
 package clinica.modulos.ingreso;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.pacientes.Paciente;
 
 public class SalaEsperaPrivada {
 		
-		private Paciente paciente=null;
+		private Paciente paciente;
 
 		public void setPaciente(Paciente paciente) {
 

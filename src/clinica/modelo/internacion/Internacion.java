@@ -1,7 +1,7 @@
 package clinica.modelo.internacion;
 
 import clinica.modelo.habitacion.Habitacion;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.pacientes.Paciente;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

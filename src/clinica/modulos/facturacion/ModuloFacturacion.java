@@ -1,16 +1,16 @@
 package clinica.modulos.facturacion;
 
-import clinica.modelo.*;
 import clinica.modelo.facturacion.Factura;
 import clinica.modelo.habitacion.Habitacion;
 import clinica.modelo.internacion.Internacion;
-import clinica.modelo.medicos.Medico;
-import clinica.modelo.pacientes.Paciente;
+import clinica.modelo.personas.medicos.Medico;
+import clinica.modelo.personas.pacientes.Paciente;
+import clinica.patrones.facade.Sistema;
 
 import java.time.LocalDate;
 import java.util.*;
 
-public class ModuloFacturacion {
+public class ModuloFacturacion extends Sistema {
     private List<Factura> facturas;
 
     public ModuloFacturacion() {

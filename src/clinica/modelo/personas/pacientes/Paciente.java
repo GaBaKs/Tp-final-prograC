@@ -1,10 +1,10 @@
-package clinica.modelo.pacientes;
+package clinica.modelo.personas.pacientes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import clinica.modelo.habitacion.Habitacion;
 import clinica.modelo.internacion.Internacion;
-import clinica.modelo.medicos.Medico;
+import clinica.modelo.personas.medicos.Medico;
 import clinica.modelo.personas.Persona;
 
 public abstract class Paciente extends Persona implements IPaciente {
