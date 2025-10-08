@@ -1,12 +1,19 @@
 package clinica.modulos.ingreso;
 
+import clinica.modelo.habitacion.Habitacion;
+import clinica.modelo.internacion.Internacion;
 import clinica.modelo.pacientes.Paciente;
+
+import java.time.LocalDate;
 
 public class AtencionPacientes {
 	private int cont=0;
 	SalaEsperaPrivada salaesperaprivada;
 	Patio patio;
-	public int numeroOrden() 
+    private Internacion internacion;
+    private Paciente paciente;
+
+    public int numeroOrden()
 	{
 		cont++;
 	    return cont;
@@ -40,7 +47,21 @@ public class AtencionPacientes {
 		
 		
 	}
-	
-	
+
+
+    public void internar(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
+        this.internacion = new Internacion(habitacion, fechaIngreso, paciente);
+    }
+
+    public void egresar(LocalDate fechaEgreso) {
+        if (internacion != null) {
+            internacion.egresar(fechaEgreso);
+        }
+    }
+
+    public Internacion getInternacion() { return internacion; }
+
+
+
 
 }

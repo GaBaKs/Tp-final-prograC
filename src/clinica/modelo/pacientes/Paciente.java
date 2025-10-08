@@ -28,8 +28,8 @@ public abstract class Paciente extends Persona implements IPaciente {
     public abstract Paciente enfrentar(Mayor m);
 
 
-    public void internar(Habitacion habitacion, LocalDate fechaIngreso) {
-        this.internacion = new Internacion(habitacion, fechaIngreso);
+    public void internar(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
+        this.internacion = new Internacion(habitacion, fechaIngreso, paciente);
     }
 
     public void egresar(LocalDate fechaEgreso) {

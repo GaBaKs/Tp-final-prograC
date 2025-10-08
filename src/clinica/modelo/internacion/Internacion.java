@@ -1,6 +1,7 @@
 package clinica.modelo.internacion;
 
 import clinica.modelo.habitacion.Habitacion;
+import clinica.modelo.pacientes.Paciente;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -12,12 +13,12 @@ public class Internacion {
     private int diasInternacion;
     private double costoTotal;
 
-    public Internacion(Habitacion habitacion, LocalDate fechaIngreso) {
+    public Internacion(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
         this.habitacion = habitacion;
         this.fechaIngreso = fechaIngreso;
         this.diasInternacion = 0;
         this.costoTotal = 0;
-        habitacion.asignarPaciente(); // marca la habitación como ocupada
+        habitacion.asignarPaciente(paciente); // marca la habitación como ocupada
     }
 
     public void egresar(LocalDate fechaEgreso) {
