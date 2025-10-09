@@ -30,8 +30,4 @@ public class Joven  extends Paciente {
         super(dni,n_A,domicilio,ciudad,telefono,numhistclinica);
     }
 
-    @Override
-    public void tipoPaciente() {
-
-    }
 }

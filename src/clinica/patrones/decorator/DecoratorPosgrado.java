@@ -10,7 +10,7 @@ public abstract class DecoratorPosgrado implements IMedico{
 		this.encapsulado=encapsulado;
 	}
 
-	
+    public abstract double honorario();
 	
 	
 

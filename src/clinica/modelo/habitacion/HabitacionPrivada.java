@@ -1,11 +1,11 @@
 package clinica.modelo.habitacion;
 
 public class HabitacionPrivada extends Habitacion {
-    private double costoDiarioBase;
+    private double costoHabPriv;
 
-    public HabitacionPrivada(int numero, double costoAsignacion, double costoDiarioBase) {
+    public HabitacionPrivada(int numero, double costoAsignacion, double costoHabPriv) {
         super(numero, costoAsignacion);
-        this.costoDiarioBase = costoDiarioBase;
+        this.costoHabPriv = costoHabPriv;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class HabitacionPrivada extends Habitacion {
         else if (diasInternacion >= 6)
             factor = 2.0;
 
-        return costoAsignacion + (costoDiarioBase * diasInternacion * factor);
+        return costoAsignacion + (costoHabPriv * diasInternacion * factor);
     }
 
     @Override

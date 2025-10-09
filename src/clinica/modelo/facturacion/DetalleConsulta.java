@@ -26,7 +26,7 @@ public class DetalleConsulta {
         DecimalFormat df = new DecimalFormat("#,###.00");
         return String.format(
                 "Médico: %-20s | Especialidad: %-10s | Subtotal: $%s",
-                medico.getN_A(), medico.getEspecialidad(), df.format(honorarioCobrado)
+                medico.getN_A(), medico.toString(), df.format(honorarioCobrado)
         );
     }
 }

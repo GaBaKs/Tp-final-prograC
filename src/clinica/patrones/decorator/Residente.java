@@ -12,8 +12,10 @@ public class Residente extends DecoratorContratacion{
 	@Override
     public double honorario()
 	{
-		return this.encapsuladoPosgrado.honorario() * 1.05;
+		return this.encapsulado.honorario() * 1.05;
 	}
-	
+
+
+    public java.lang.String toString() { return this.encapsulado.toString(); }
 
 }

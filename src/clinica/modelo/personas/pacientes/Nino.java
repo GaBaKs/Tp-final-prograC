@@ -29,9 +29,4 @@ public class Nino extends Paciente {
             return m;
         }
 
-
-    @Override
-    public void tipoPaciente() {
-
-    }
 }

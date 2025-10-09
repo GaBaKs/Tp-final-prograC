@@ -15,5 +15,7 @@ public class Magister extends DecoratorPosgrado {
 	{
 		return this.encapsulado.honorario() * 1.05;
 	}
-	
+
+    @Override
+    public String toString() { return this.encapsulado.toString(); }
 }

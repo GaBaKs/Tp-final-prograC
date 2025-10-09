@@ -7,7 +7,7 @@ import clinica.modelo.internacion.Internacion;
 import clinica.modelo.personas.medicos.Medico;
 import clinica.modelo.personas.Persona;
 
-public abstract class Paciente extends Persona implements IPaciente {
+public abstract class Paciente extends Persona {
 
     private int numhistclinica;
     private String rangoetario;

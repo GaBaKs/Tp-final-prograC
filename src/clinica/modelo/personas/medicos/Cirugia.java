@@ -2,15 +2,16 @@ package clinica.modelo.personas.medicos;
 
 public class Cirugia extends Medico {
 
-	public Cirugia(String dni,String N_A,String domicilio,String ciudad,int NMatricula,String telefono,String especialidad)
+	public Cirugia(String dni,String N_A,String domicilio,String ciudad,int NMatricula,String telefono)
 	{
-		super(dni,N_A,domicilio,ciudad,NMatricula,telefono,especialidad);
+		super(dni,N_A,domicilio,ciudad,NMatricula,telefono);
 	}
 
 
     @Override
-    public double honorario() {
-        return 0;
-    }
+    public double honorario() {return this.base * 1.10 ;}
 
+    @Override
+    public String toString() { return "Cirugia" ;
+    }
 }

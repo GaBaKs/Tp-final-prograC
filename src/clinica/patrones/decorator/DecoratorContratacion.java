@@ -3,11 +3,11 @@ package clinica.patrones.decorator;
 import clinica.modelo.personas.medicos.IMedico;
 
 public abstract class DecoratorContratacion implements IMedico{
-    IMedico encapsuladoPosgrado;
+    IMedico encapsulado;
 
     public DecoratorContratacion(IMedico encapsulado)
     {
-        this.encapsuladoPosgrado=encapsulado;
+        this.encapsulado =encapsulado;
     }
 
 

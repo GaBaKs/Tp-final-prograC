@@ -1,16 +1,16 @@
 package clinica.modelo.habitacion;
 
 public class HabitacionCompartida extends Habitacion {
-    private double costoDiario;
+    private double costoHabComp;
 
-    public HabitacionCompartida(int numero, double costoAsignacion, double costoDiario) {
+    public HabitacionCompartida(int numero, double costoAsignacion, double costoHabComp) {
         super(numero, costoAsignacion);
-        this.costoDiario = costoDiario;
+        this.costoHabComp = costoHabComp;
     }
 
     @Override
     public double calcularCostoTotal(int diasInternacion) {
-        return costoAsignacion + (costoDiario * diasInternacion);
+        return costoAsignacion + (costoHabComp * diasInternacion);
     }
 
     @Override

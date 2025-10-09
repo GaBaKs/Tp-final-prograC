@@ -15,7 +15,7 @@ public class Doctorado extends DecoratorPosgrado {
 	{
 		return this.encapsulado.honorario() * 1.1;
 	}
-	
-	
 
+    @java.lang.Override
+    public java.lang.String toString() { return this.encapsulado.toString(); }
 }

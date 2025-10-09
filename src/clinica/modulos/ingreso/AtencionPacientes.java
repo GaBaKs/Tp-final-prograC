@@ -28,9 +28,9 @@ public class AtencionPacientes {
 	    return cont;
 	}
 	
-	public void ingresaPaciente(Paciente p1) {
-			p1.setnumorden(numeroOrden());
-			ingresaCola(p1);
+	public void ingresaPaciente(Paciente p1){
+            p1.setnumorden(numeroOrden());
+            ingresaCola(p1);
 	}
 
     public void ingresaCola(Paciente p1) {

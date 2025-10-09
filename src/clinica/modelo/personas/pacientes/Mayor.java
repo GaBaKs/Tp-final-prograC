@@ -30,9 +30,4 @@ public class Mayor extends Paciente {
     public Mayor(String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica) {
         super(dni,n_A,domicilio,ciudad,telefono,numhistclinica);
     }
-
-    @Override
-    public void tipoPaciente() {
-
-    }
 }

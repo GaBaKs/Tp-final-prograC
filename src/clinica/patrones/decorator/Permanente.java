@@ -12,9 +12,8 @@ public class Permanente  extends DecoratorContratacion {
 	@Override
 	public double honorario()
 	{
-		return this.encapsuladoPosgrado.honorario() * 1.1;
+		return this.encapsulado.honorario() * 1.1;
 	}
-	
-	
 
+    public java.lang.String toString() { return this.encapsulado.toString(); }
 }
