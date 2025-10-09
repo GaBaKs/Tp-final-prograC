@@ -4,24 +4,18 @@ import clinica.modelo.habitacion.Habitacion;
 import clinica.modelo.internacion.Internacion;
 import clinica.modelo.personas.pacientes.Paciente;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.time.LocalDate;
 
-public class AtencionPacientes {
-	private int cont=0;
+public class IngresoPacientes {
+	private int cont;
 	SalaEsperaPrivada salaesperaprivada;
 	LinkedList<Paciente> patio;
     private Internacion internacion;
     private Paciente paciente;
-    private Queue<Paciente> listaEspera;// Solo puede haber un paciente// Pacientes en espera afuera
-
-    public void AtencionPacientes() {
-        listaEspera = new LinkedList<Paciente>();
-        patio = new LinkedList<Paciente>();
-        salaesperaprivada = null;
-    }
-
+    private LinkedList<Paciente> listaEspera;
 
     public int numeroOrden() {
 		cont++;
@@ -50,11 +44,11 @@ public class AtencionPacientes {
 		}
 	}
 
-    public Queue<Paciente> getPacientesPatio() {
+    public LinkedList<Paciente> getPacientesPatio() {
         return patio;
     }
 
-    public Queue<Paciente> getListaEspera() {
+    public LinkedList<Paciente> getListaEspera() {
         return listaEspera;
     }
 
@@ -70,7 +64,13 @@ public class AtencionPacientes {
 
     public Internacion getInternacion() { return internacion; }
 
-
+    public IngresoPacientes(){
+        salaesperaprivada=null;
+        patio=new LinkedList<>();
+        //internacion ??
+        listaEspera=new LinkedList<>();
+        cont=0;
+    }
 
 
 }

@@ -1,7 +1,7 @@
 package clinica.modelo.personas.pacientes;
 
 public class FactoryPaciente {
-    public Paciente creaPaciente(String tipopaciente, String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica)
+    public static Paciente creaPaciente(String tipopaciente, String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica)
     {
         if (tipopaciente == null) {
             return null;
