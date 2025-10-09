@@ -23,19 +23,15 @@ public class AtencionPacientes {
     }
 
 
-    public int numeroOrden()
-	{
+    public int numeroOrden() {
 		cont++;
 	    return cont;
 	}
 	
-	public void ingresaPaciente(Paciente p1)
-	{
+	public void ingresaPaciente(Paciente p1) {
 			p1.setnumorden(numeroOrden());
 			ingresaCola(p1);
 	}
-
-
 
     public void ingresaCola(Paciente p1) {
 		if (salaesperaprivada.salaLibre())
