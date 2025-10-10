@@ -1,5 +1,6 @@
 package clinica.modelo.personas.pacientes;
 
+/** clase extendida de Paciente y diferenciada por rango etario */
 public class Nino extends Paciente {
 
     public Nino(String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica) {

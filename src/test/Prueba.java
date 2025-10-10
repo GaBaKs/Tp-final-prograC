@@ -19,20 +19,24 @@ public class Prueba {
 
 
 
-        IMedico medico1=new Cirugia("45290972","octavio","echeverria","mar del plata",12345,"4494935");
-        IMedico DP=new Magister(medico1);
-        IMedico DC=new Permanente(DP);
-        System.out.println("especialidad: "+DC.toString());
+       MedicoFactory medicofactory=new MedicoFactory();
+       Medico medico1=medicofactory.creaMedico("clinica","45290972","octavio laz","La rioja 4582","mar del plata",12345,"223449493");
+       IMedico decoratorPosgrado=new Magister(medico1);
+       IMedico decoratorContratacion=new Permanente(decoratorPosgrado);
 
-        sistema.registraMedico(medico1);
-       // sistema.registraMedico(medico2);
-       // sistema.registraPaciente(paciente1);
-       // sistema.registraPaciente(paciente2);
-       // sistema.ingresaPaciente(paciente1);
-       // sistema.ingresaPaciente(paciente2);
-       // sistema.atiendePaciente(medico1, paciente1);
-       // sistema.atiendePaciente(medico2, paciente1);
-      //  factura1 = sistema.egresaPaciente(paciente1);
+       Medico medico2=medicofactory.creaMedico("pediatra","45431234","Marcelo Gutierrez","Colon 2345","mar del plata",12347,"223449356");
+       IMedico decoratorPosgrado2=new Magister(medico2);
+       IMedico decoratorContratacion2=new Permanente(decoratorPosgrado2);
+
+       sistema.registraMedico(medico1);
+       sistema.registraMedico(medico2);
+       sistema.registraPaciente(paciente1);
+       sistema.registraPaciente(paciente2);
+       sistema.ingresaPaciente(paciente1);
+       sistema.ingresaPaciente(paciente2);
+       sistema.atiendePaciente(medico1, paciente1);
+       sistema.atiendePaciente(medico2, paciente1);
+       //factura1 = sistema.egresaPaciente(paciente1);
       //  sistema.atiendePaciente(medico3, paciente2);
       //  sistema.internaPaciente(paciente2,habitacion3);
       //  factura2 = sistema.egresaPaciente(paciente2, cantidadDias);

@@ -1,5 +1,5 @@
 package clinica.modelo.personas;
-
+/** clase abstracta que define los atributos de una persona */
 public abstract class Persona {
     String dni;
     String N_A;
@@ -27,10 +27,6 @@ public abstract class Persona {
         return dni;
     }
 
-    public Persona(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
     public String getCiudad() {
         return ciudad;
     }
@@ -46,9 +42,11 @@ public abstract class Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
     public String getDomicilio() {
         return domicilio;
     }
+
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
     }

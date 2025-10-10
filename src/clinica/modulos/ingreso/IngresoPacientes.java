@@ -15,14 +15,14 @@ public class IngresoPacientes {
 	LinkedList<Paciente> patio;
     private Internacion internacion;
     private Paciente paciente;
-    private LinkedList<Paciente> listaEspera;
+    public LinkedList<Paciente> listaEspera;
 
     public int numeroOrden() {
 		cont++;
 	    return cont;
 	}
-	
-	public void ingresaPaciente(Paciente p1){
+
+	public void ingresaPaciente(Paciente p1){   // ingresa paciente a la lista de espera
             p1.setnumorden(numeroOrden());
             ingresaCola(p1);
 	}
@@ -44,13 +44,7 @@ public class IngresoPacientes {
 		}
 	}
 
-    public LinkedList<Paciente> getPacientesPatio() {
-        return patio;
-    }
 
-    public LinkedList<Paciente> getListaEspera() {
-        return listaEspera;
-    }
 
     public void internar(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
         this.internacion = new Internacion(habitacion, fechaIngreso, paciente);
@@ -61,8 +55,6 @@ public class IngresoPacientes {
             internacion.egresar(fechaEgreso);
         }
     }
-
-    public Internacion getInternacion() { return internacion; }
 
     public IngresoPacientes(){
         salaesperaprivada=null;

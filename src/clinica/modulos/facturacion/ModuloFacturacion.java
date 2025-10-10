@@ -1,5 +1,6 @@
 package clinica.modulos.facturacion;
 
+import clinica.modelo.facturacion.DetalleConsulta;
 import clinica.modelo.facturacion.Factura;
 import clinica.modelo.habitacion.Habitacion;
 import clinica.modelo.internacion.Internacion;
@@ -17,12 +18,12 @@ public class ModuloFacturacion extends Sistema {
         this.facturas = new ArrayList<>();
     }
 
-    public Factura generarFactura(Paciente paciente, List<Medico> medicos) {
+    public Factura generarFactura(Paciente paciente, DetalleConsulta consulta) {
         LocalDate fechaIngreso;
         LocalDate fechaEgreso;
         Habitacion habitacion = null;
         int dias = 0;
-        double costoHabitacion = 0;
+        double costoHabitacion = 0,total;
 
         if (paciente.getInternacion() != null) {
             Internacion internacion = paciente.getInternacion();
@@ -37,19 +38,13 @@ public class ModuloFacturacion extends Sistema {
             fechaEgreso = LocalDate.now();
         }
 
-        Factura factura = new Factura(paciente, fechaIngreso, fechaEgreso);
-
-        // agregar consultas médicas
-        for (Medico m : medicos) {
-            factura.agregarConsulta(m);
-        }
-
+        Factura factura = new Factura(paciente, fechaIngreso, fechaEgreso,consulta);
         // agregar internación si existió
         if (habitacion != null) {
             factura.setInternacion(habitacion, dias, costoHabitacion);
         }
 
-        factura.calcularTotal();
+        factura.setTotal(factura.getTotal());;
         facturas.add(factura);
 
         return factura;

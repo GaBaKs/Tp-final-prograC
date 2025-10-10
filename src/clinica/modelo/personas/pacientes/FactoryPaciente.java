@@ -1,5 +1,6 @@
 package clinica.modelo.personas.pacientes;
 
+/** esta clase aplica el patron factory sobre los pacientes*/
 public class FactoryPaciente {
     public static Paciente creaPaciente(String tipopaciente, String dni, String n_A, String domicilio, String ciudad, String telefono, int numhistclinica)
     {
@@ -13,6 +14,6 @@ public class FactoryPaciente {
         } else if (tipopaciente.equalsIgnoreCase("Mayor")) {
             return new Mayor(dni,n_A,domicilio,ciudad,telefono,numhistclinica);
         }
-        return null;
+        return null;  // devuelve null si intento crear un paciente con un rango etario que no existe
     }
 }

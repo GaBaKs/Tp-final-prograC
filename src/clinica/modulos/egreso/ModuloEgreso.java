@@ -22,7 +22,7 @@ public class ModuloEgreso {
 
      //Egresar un paciente (lo selecciona, genera su factura y lo saca de la lista)
 
-    public void egresarPaciente(Paciente paciente, List<Medico> medicos) {
+    public void egresarPaciente(Paciente paciente ) {
         if (!pacientesEnAtencion.contains(paciente)) {
             System.out.println("El paciente no está en la lista de atención.");
             return;
@@ -35,7 +35,7 @@ public class ModuloEgreso {
         }
 
         // Generar la factura
-        var factura = moduloFacturacion.generarFactura(paciente, medicos);
+        var factura = moduloFacturacion.generarFactura(paciente,paciente.get);
 
         // Retirar paciente de lista de atención
         pacientesEnAtencion.remove(paciente);

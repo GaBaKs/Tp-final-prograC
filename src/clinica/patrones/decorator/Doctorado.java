@@ -2,12 +2,12 @@ package clinica.patrones.decorator;
 
 import clinica.modelo.personas.medicos.IMedico;
 
+/** extiende la clase DecoratorPosgrado y aplica la capa decoradora */
 public class Doctorado extends DecoratorPosgrado {
 
 	public Doctorado(IMedico encapsulado)
 	{
 		super(encapsulado);
-		
 	}
 
 	@Override
@@ -17,5 +17,5 @@ public class Doctorado extends DecoratorPosgrado {
 	}
 
     @java.lang.Override
-    public java.lang.String toString() { return this.encapsulado.toString(); }
+    public java.lang.String getEspecialidad() { return this.encapsulado.getEspecialidad(); }
 }

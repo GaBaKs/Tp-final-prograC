@@ -1,5 +1,6 @@
 package clinica.modelo.personas.medicos;
 
+/** especialidad de la calse medico */
 public class Cirugia extends Medico {
 
 	public Cirugia(String dni,String N_A,String domicilio,String ciudad,int NMatricula,String telefono)
@@ -9,9 +10,8 @@ public class Cirugia extends Medico {
 
 
     @Override
-    public double honorario() {return this.base * 1.10 ;}
+    public double honorario() { return this.base * 1.10 ; }
 
     @Override
-    public String toString() { return "Cirugia" ;
-    }
+    public String getEspecialidad() { return "Cirugia" ; }
 }
