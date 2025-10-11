@@ -8,23 +8,23 @@ import clinica.modelo.internacion.Internacion;
 import clinica.modelo.personas.medicos.IMedico;
 import clinica.modelo.personas.medicos.Medico;
 import clinica.modelo.personas.Persona;
-/** paciente se extiende de persona y es extendida por los tipos de paciente(su rango etario)*/
+/** Representa a un paciente el cual se extiende de persona y es extendida por los tipos de paciente(segun su rango etario).*/
 public abstract class Paciente extends Persona {
 
     private int numhistclinica;
 
-    /** numero que le da la clinica para ser atendido*/
+    /** Numero que le da la clinica para ser atendido.*/
     private int numorden;
 
     DetalleConsulta detalleConsulta;
 
-    /** fecha en la cual el pciente ingreso a la consulta*/
+    /** Fecha en la cual el pciente ingreso a la consulta.*/
     LocalDate fechaingreso;
 
-    /** es la habitacion en la cual el paciente sera atendido*/
+    /** Es la habitacion en la cual el paciente sera atendido.*/
     Habitacion habitacion;
 
-    /** este puntero nos indica si el paciente esta en una habitacion de internacion(si esta internado) o no*/
+    /** Este puntero nos indica si el paciente esta en una habitacion de internacion(si esta internado) o no.*/
     private Internacion internacion;
 
     public Paciente(String dni, String n_A, String domicilio, String ciudad,String telefono,int numhistclinica) {
@@ -32,20 +32,24 @@ public abstract class Paciente extends Persona {
         this.numhistclinica = numhistclinica;
         detalleConsulta= new DetalleConsulta();
     }
-
+    
+    /** Comprueba los rangos etarios de dos pacientes y le asigna a cada uno un lugar en la lista de espera. */
     public abstract Paciente decidirLugar(Paciente otro);
     public abstract Paciente enfrentar(Nino n);
     public abstract Paciente enfrentar(Joven j);
     public abstract Paciente enfrentar(Mayor m);
 
+    /** Agrega un medico a la lista de medicos que atendieron al paciente. */
     public void agregaMedicoAtendido(Medico m1){
         detalleConsulta.agregaMedico(m1);
     }
 
+    /** Interna al paciente, asignandole una habitacion */
     public void internar(Habitacion habitacion, LocalDate fechaIngreso, Paciente paciente) {
         this.internacion = new Internacion(habitacion, fechaIngreso, paciente);
     }
 
+    /** Se le da el alta a un paciente con una fecha de egreso para conocer los dias que paso internado. */
     public void egresar(LocalDate fechaEgreso) {
         if (internacion != null) {
             internacion.egresar(fechaEgreso);

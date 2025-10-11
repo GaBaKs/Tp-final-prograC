@@ -1,5 +1,5 @@
 package clinica.modelo.personas;
-/** clase abstracta que define los atributos de una persona */
+/** Clase abstracta que define los atributos de una persona */
 public abstract class Persona {
     String dni;
     String N_A;

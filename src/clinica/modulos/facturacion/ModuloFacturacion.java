@@ -11,13 +11,16 @@ import clinica.patrones.facade.Sistema;
 import java.time.LocalDate;
 import java.util.*;
 
+/** Modulo que se encarga de la facturacion de la clinica. */
 public class ModuloFacturacion extends Sistema {
+    /** Historial de facturas de la clinica. */
     private List<Factura> facturas;
 
     public ModuloFacturacion() {
         this.facturas = new ArrayList<>();
     }
 
+    /** Genera la factura con los datos correspondientes. */
     public Factura generarFactura(Paciente paciente, DetalleConsulta consulta) {
         LocalDate fechaIngreso;
         LocalDate fechaEgreso;

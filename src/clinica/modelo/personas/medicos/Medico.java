@@ -6,7 +6,7 @@ import clinica.modelo.personas.pacientes.Paciente;
 import java.util.ArrayList;
 
 
-/**la clase Medico contiene los atributos comunes de los medicos(sueldo base y numero de matricula), es abstracta por que se tiene q especializar(extenderse) */
+/**La clase Medico contiene los atributos comunes de los medicos(sueldo base y numero de matricula), es abstracta por que se tiene que especializar(extenderse) */
 public abstract class Medico extends Persona implements IMedico {
 	int NMatricula;
 	double base=20000;      // sueldo base de un medico
@@ -30,6 +30,7 @@ public abstract class Medico extends Persona implements IMedico {
         return base;
     }   // devuelve el sueldo minimo
 
+    /** Agrega un {@link Paciente} a la lista de pacientes atendidos del medico correspondiente. */
     public void agregaPacienteAtendido(Paciente p1){
         PacientesAtendidos.add(p1);
     }

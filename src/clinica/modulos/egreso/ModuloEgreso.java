@@ -9,9 +9,12 @@ import clinica.modulos.facturacion.ModuloFacturacion;
 import java.time.LocalDate;
 import java.util.List;
 
+/** Modulo que simula el alta de los pacientes. */
 public class ModuloEgreso {
 
+    /** Lista de pacientes en atencion. */
     private List<Paciente> pacientesEnAtencion;
+    /** Modulo que se encarga de la facturacion correspondiente */
     private ModuloFacturacion moduloFacturacion;
 
     public ModuloEgreso(List<Paciente> pacientesEnAtencion, ModuloFacturacion moduloFacturacion) {
@@ -22,6 +25,7 @@ public class ModuloEgreso {
 
      //Egresar un paciente (lo selecciona, genera su factura y lo saca de la lista)
 
+    /** Se le da el alta al paciente generando su factura y sacandolo de la lista de pacientes en atencion. */
     public void egresarPaciente(Paciente paciente ) {
         if (!pacientesEnAtencion.contains(paciente)) {
             System.out.println("El paciente no está en la lista de atención.");

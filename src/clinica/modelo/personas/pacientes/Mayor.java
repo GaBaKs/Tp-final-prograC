@@ -1,6 +1,6 @@
 package clinica.modelo.personas.pacientes;
 
-/** clase extendida de Paciente y diferenciada por rango etario */
+/** Clase extendida de Paciente y diferenciada por rango etario. */
 public class Mayor extends Paciente {
 
     @Override

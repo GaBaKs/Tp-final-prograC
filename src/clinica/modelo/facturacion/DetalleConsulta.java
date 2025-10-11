@@ -6,7 +6,7 @@ import clinica.modelo.personas.medicos.Medico;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-/** clase que contiene todo lo que se necesita para facturar, tiene runa relacion de composicion con paciente */
+/** clase que contiene todo lo que se necesita para facturar, tiene una relacion de composicion con paciente */
 public class DetalleConsulta {
 
     /**

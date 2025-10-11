@@ -3,7 +3,7 @@ package clinica.modelo.personas.medicos;
 public class MedicoFactory {
     public MedicoFactory() {}
 
-    /**clase que aplica el patron factory sobre los medicos*/
+    /**Clase que aplica el patron factory sobre los medicos.*/
     public Medico creaMedico(String tipoMedico,String dni,String N_A,String domicilio,String ciudad,int nMatricula,String telefono)
     {
         if(tipoMedico == null) { return null; }
