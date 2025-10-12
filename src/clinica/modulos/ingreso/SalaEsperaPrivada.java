@@ -3,13 +3,18 @@ import clinica.modelo.personas.pacientes.Paciente;
 
 /** Representa la sala de espera privada, donde solo puede haber un paciente. */
 public class SalaEsperaPrivada {
-		
+
 		private Paciente paciente;
+
+        public SalaEsperaPrivada(){
+            paciente=null;
+        }
 
 		public void setPaciente(Paciente paciente) {
 
             this.paciente = paciente;
 		}
+
 
         public Paciente getPaciente()
         {

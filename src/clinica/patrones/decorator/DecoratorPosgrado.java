@@ -1,10 +1,10 @@
 package clinica.patrones.decorator;
 
-/** decorator que contiene un medico como encapsulado*/
+/** Decorator que contiene un medico como encapsulado.*/
 import clinica.modelo.personas.medicos.IMedico;
 
 public abstract class DecoratorPosgrado implements IMedico{
-    /** este encapsulado es un medico por lo cual se usaran los metodos de un medico y se le aplica la capa del decorator*/
+    /** Este encapsulado es un medico por lo cual se usaran los metodos de un medico y se le aplica la capa del decorator.*/
     IMedico encapsulado;
 	
 	public DecoratorPosgrado(IMedico encapsulado)

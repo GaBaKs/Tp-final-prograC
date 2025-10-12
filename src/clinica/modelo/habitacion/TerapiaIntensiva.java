@@ -11,8 +11,11 @@ public class TerapiaIntensiva extends Habitacion {
         super(numero, costoAsignacion);
         this.costoTerInt = costoTerInt;
     }
+
     /**
-     * Sobreesribe el metodo para el calculo del costo total
+     * Sobreesribe el metodo para el calculo del costo total.
+     * @param diasInternacion
+     * @return CostoTotal
      */
     @Override
     public double calcularCostoTotal(int diasInternacion) {

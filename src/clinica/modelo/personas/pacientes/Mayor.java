@@ -8,18 +8,30 @@ public class Mayor extends Paciente {
         return otro.enfrentar(this);
     }
 
+    /**  Devuelve la prioridad entre un mayor y un nino.
+     * @param n
+     * @return Nino
+     */
     @Override
     public Paciente enfrentar(Nino n) {
         //Mayor vs Niño
         return this;
     }
 
+    /**  Devuelve la prioridad entre un mayor y un joven.
+     * @param j
+     * @return Joven
+     */
     @Override
     public Paciente enfrentar(Joven j) {
         //Mayor vs Joven
         return j;
     }
 
+    /**  Devuelve la prioridad entre un mayor y otro mayor.
+     * @param m
+     * @return Mayor
+     */
     @Override
     public Paciente enfrentar(Mayor m) {
         //Mayor vs Mayor

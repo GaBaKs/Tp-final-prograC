@@ -1,58 +1,69 @@
 package clinica.modulos.atencion;
 
-import clinica.modelo.personas.medicos.Medico;
+import clinica.modelo.personas.medicos.IMedico;
 import clinica.modelo.personas.pacientes.Paciente;
-import clinica.modelo.habitacion.Habitacion;
+import clinica.modulos.ProcesoPacientes;
 
-import java.util.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /** Representa la atencion al paciente al entrar a la clinica. */
-public class AtencionPaciente {
-    /** Lista de pacientes en atencion, con su medico correspondiente. */
-    private Map<Paciente, List<Medico>> pacientesEnAtencion;
-    /** Lista de pacientes con su habitacion correspondiente. */
-    private Map<Paciente, Habitacion> habitacionesAsignadas;
+public class AtencionPaciente{
 
+    private ProcesoPacientes modProceso;
+    /**Lista que contiene los pacientes que se encuentran en atencion.*/
+    private ArrayList<Paciente> pacientesEnAtencion;
 
-    public void AtencionPacientes() {
-        pacientesEnAtencion = new HashMap<>();
-        habitacionesAsignadas = new HashMap<>();
+    public AtencionPaciente(ProcesoPacientes proceso)
+    {
+        modProceso=proceso;
+        pacientesEnAtencion=new ArrayList();
+    }
+    /** Se retira al paciente de la lista de espera y se agrega en la lista de pacientes en atencion.
+     *
+     * @param medico
+     * @param paciente
+     */
+    public void atiendePaciente(IMedico medico, Paciente paciente)
+    { // El paciente es retirado de la espera y se agrega a atención
+        if (modProceso.getSalaesperaPrivada().getPaciente()!=null && modProceso.getSalaesperaPrivada().getPaciente().equals(paciente))
+        {
+            modProceso.getSalaesperaPrivada().setPaciente(null);
+        }
+        else
+        {
+            if (modProceso.getPatio().estaEnPatio(paciente)) {
+                modProceso.getPatio().sacaPaciente(paciente);
+            }
+        }
+        if (!(pacientesEnAtencion.contains(paciente))) {
+            pacientesEnAtencion.add(paciente);
+        }
+        modProceso.agregaConsulta(medico,paciente);
     }
 
-    /** Se retira al paciente de la lista de espera y se agrega en la lista de pacientes en atencion. */
-    public void atiendePaciente(Medico medico, Paciente paciente) { // El paciente es retirado de la espera y se agrega a atención
-        pacientesEnAtencion.putIfAbsent(paciente, new ArrayList<>());
-        pacientesEnAtencion.get(paciente).add(medico);
+    /**
+     * Se retira al paciente de la lista de atencion, lo que indica su egreso de la clinica.
+     * @param p1
+     */
+    public void sacaPacienteAtencion(Paciente p1)
+    {
+        pacientesEnAtencion.remove(p1);
     }
 
-    /** Interna al paciente asignandole la habitacion correspondiente.*/
-    public void internaPaciente(Paciente paciente, Habitacion habitacion) {
-        habitacionesAsignadas.put(paciente, habitacion);
-        habitacion.asignarPaciente(paciente);
+    /**
+     * Comprueba que el paciente se encuentre en la lista de atencion.
+     * @param paciente
+     * @return boolean
+     */
+    public boolean tienePaciente(Paciente paciente)
+    {
+        if(pacientesEnAtencion.contains(paciente))
+            return true;
+        else
+            return false;
     }
-
-    /** Libera la habitacion, preparandola para un nuevo paciente. */
-    public void liberarHabitacion(Paciente paciente) {
-        Habitacion h = habitacionesAsignadas.remove(paciente);
-        if (h != null) h.liberarHabitacion();
-    }
-
-
-    public List<Medico> obtenerMedicosQueAtendieron(Paciente paciente) {
-        return pacientesEnAtencion.getOrDefault(paciente, new ArrayList<>());
-    }
-
-    public Habitacion obtenerHabitacionDePaciente(Paciente paciente) {
-        return habitacionesAsignadas.get(paciente);
-    }
-
-    /** Se retira al paciente de la lista de atendidos indicando que su consulta y/o internacion a terminado. */
-    public void retirarPaciente(Paciente paciente) {
-        pacientesEnAtencion.remove(paciente);
-        habitacionesAsignadas.remove(paciente);
-    }
-
-    public Map<Paciente, List<Medico>> getPacientesEnAtencion() {
+    public  ArrayList<Paciente>  getPacientesEnAtencion() {
         return pacientesEnAtencion;
     }
 }

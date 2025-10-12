@@ -1,6 +1,6 @@
 package excepciones;
- //creo que hace eso jasdjadsj
-/** Excepcion que indica que el paciente esta repetido en algun registro. */
+
+/** Excepcion que indica que la persona ya esta registrada en la base de datos de la clinica, evita duplicarlas. */
 public class DuplicadoException extends RuntimeException {
     public DuplicadoException(String message)
     {

@@ -12,18 +12,30 @@ public class Nino extends Paciente {
             return otro.enfrentar(this);
         }
 
-        @Override
+    /**  Devuelve la prioridad entre un nino y otro.
+     * @param n
+     * @return Nino
+     */
+    @Override
         public Paciente enfrentar(Nino n) {
             //Niño vs Niño
             return this;
         }
 
+    /**  Devuelve la prioridad entre un nino y un joven.
+     * @param j
+     * @return Joven
+     */
         @Override
         public Paciente enfrentar(Joven j) {
             //Niño vs Joven
             return this;
         }
 
+    /**  Devuelve la prioridad entre un nino y un mayor.
+     * @param m
+     * @return Mayor
+     */
         @Override
         public Paciente enfrentar(Mayor m) {
             //Niño vs Mayor
