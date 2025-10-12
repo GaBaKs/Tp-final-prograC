@@ -47,16 +47,16 @@ public class IngresoPacientes
      */
     public void ingresaCola(Paciente p1)
     {
-		if (modProceso.salaesperaprivada.salaLibre())
-			modProceso.salaesperaprivada.setPaciente(p1);
+		if (modProceso.getSalaesperaPrivada().salaLibre())
+			modProceso.getSalaesperaPrivada().setPaciente(p1);
 		else {
-            Paciente actual = modProceso.salaesperaprivada.getPaciente();
+            Paciente actual = modProceso.getSalaesperaPrivada().getPaciente();
             Paciente ganador = p1.decidirLugar(actual);
             Paciente perdedor = (ganador == p1) ? actual : p1;
 
             if (ganador!=actual)
-                modProceso.salaesperaprivada.setPaciente(ganador);
-            modProceso.patio.agregaPaciente(perdedor);
+                modProceso.getSalaesperaPrivada().setPaciente(ganador);
+            modProceso.getPatio().agregaPaciente(perdedor);
 
 		}
 	}

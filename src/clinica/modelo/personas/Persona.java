@@ -2,15 +2,15 @@ package clinica.modelo.personas;
 /** Clase abstracta que define los atributos de una persona. */
 public abstract class Persona {
     /**Representa el DNI de la persona.*/
-    String dni;
+    private String dni;
     /**Representa el nombre y apellido de la persona.*/
-    String N_A;
+    private String N_A;
     /**Represnta el domicilio de la persona.*/
-    String domicilio;
+    private String domicilio;
     /**Representa la ciudad de la persona.*/
-    String ciudad;
+    private String ciudad;
     /**Representa le numero telefonico de la persona.*/
-    String telefono;
+    private String telefono;
 
     public Persona(String dni, String n_A, String domicilio, String ciudad,String telefono) {
         this.dni = dni;

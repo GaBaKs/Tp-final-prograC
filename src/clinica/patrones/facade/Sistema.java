@@ -20,17 +20,17 @@ import excepciones.*;
 /** Simula el sistema para interactuar con el programa aplicando el patron Facade. */
 public class Sistema {
     /**Arreglo de medicos registrados en la clinica.*/
-    ArrayList<IMedico> medicosistema;
+    private ArrayList<IMedico> medicosistema;
 
     private ArrayList<Factura> facturas;
 
     /**Arreglo de pacientes registrados en la clinica. */
-    ArrayList <Paciente> pacientesistema;
+    private ArrayList <Paciente> pacientesistema;
 
     /**Modulo que contiene los metodos para ingresar pacientes a la clinica.*/
-    IngresoPacientes modIngresoPacientes;
+    private IngresoPacientes modIngresoPacientes;
     /**Modulo que contiene los metodos para atender pacientes de la clinica.*/
-    AtencionPaciente modAtencionPacientes;
+    private AtencionPaciente modAtencionPacientes;
 
 
     ProcesoPacientes modProcesoPacientes;
@@ -98,7 +98,7 @@ public class Sistema {
         if (!(medicosistema.contains(m1)))
             throw new NoEstaEnSistemaException("Medico no esta en el sistema");
         else
-            if (modProcesoPacientes.listaEspera.contains(p1)){
+            if (modProcesoPacientes.getListaEspera().contains(p1)){
                  modAtencionPacientes.atiendePaciente(m1,p1);
              }
             else

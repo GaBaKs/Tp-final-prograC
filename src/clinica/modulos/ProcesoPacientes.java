@@ -119,4 +119,12 @@ public class ProcesoPacientes {
     {
         return salaesperaprivada;
     }
+    public  LinkedList<Consulta> getConsultaspendientes()
+    {
+        return consultaspendientes;
+    }
+    public LinkedList<Paciente> getListaEspera()
+    {
+        return listaEspera;
+    }
 }

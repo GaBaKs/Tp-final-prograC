@@ -23,6 +23,8 @@ public class ReporteMedico {
             int i=0;
             double acum=0;
             StringBuilder sb = new StringBuilder();
+            sb.append("REPORTE MEDICO\n");
+            sb.append("================================================\n");
             sb.append("Medico: "+medico.getNombre()+"\n");
              while(i<facturas.size() && facturas.get(i).getFechaEgreso().isBefore(desde))       // llega hasta la 1ra factura con fecha de egreso mas grande que desde
                 i++;
@@ -41,6 +43,7 @@ public class ReporteMedico {
                  i++;
              }
              sb.append("\t \t Total: ").append(acum).append("\n");
+        sb.append("================================================\n");
 
             return sb.toString();
     }
