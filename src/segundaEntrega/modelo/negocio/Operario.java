@@ -21,7 +21,7 @@ public class Operario extends Persona implements Runnable{
     @Override
     public void run() {
         for(int i=0;i<numsolicitudes;i++){
-            this.ambulancia.operarioSolicitaMantenimiento(this);
+            this.ambulancia.solicitudMantenimiento(this);
         }
     }
 }
