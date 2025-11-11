@@ -33,10 +33,10 @@ public class Ambulancia extends Observable {
         this.ambulanciaState.pacienteSolicitaAtencion(asociado);
         this.asociado = asociado;
         this.setChanged();
-        this.notifyObservers(asociado.getName()+" esta siendo atendido a domicilio por la ambulancia.");//en el state
+        this.notifyObservers(asociado.getN_A()+" esta siendo atendido a domicilio por la ambulancia.");//en el state
         //no se como simular la atencion xd deberia hacerlo en otra funcion?
         setChanged();
-        this.notifyObservers(asociado.getName()+" termino de ser atendido a domicilio por la ambulancia."); //esto iria en el state y habria q cambiar el asociado a null aca
+        this.notifyObservers(asociado.getN_A()+" termino de ser atendido a domicilio por la ambulancia."); //esto iria en el state y habria q cambiar el asociado a null aca
         this.asociado=null;
         notifyAll();
     }
@@ -47,16 +47,16 @@ public class Ambulancia extends Observable {
         {
             try {
                 this.setChanged();
-                this.notifyObservers(asociado.getName() + "Esta esperando a ser atendido a domicilio por la ambulancia.");
+                this.notifyObservers(asociado.getN_A() + "Esta esperando a ser atendido a domicilio por la ambulancia.");
                 wait();
             } catch (InterruptedException e) {e.printStackTrace();}
         }
         this.setChanged();
         this.asociado = asociado;
         this.ambulanciaState.pacienteSolicitaTraslado(asociado);
-        this.notifyObservers(asociado.getName()+" esta siendo atendido a domicilio por la ambulancia."); //en el state
+        this.notifyObservers(asociado.getN_A()+" esta siendo atendido a domicilio por la ambulancia."); //en el state
         setChanged();
-        this.notifyObservers(asociado.getName()+" termino de ser atendido a domicilio por la ambulancia."); //idem y ahi tendria q cambiar el asociado a null
+        this.notifyObservers(asociado.getN_A()+" termino de ser atendido a domicilio por la ambulancia."); //idem y ahi tendria q cambiar el asociado a null
         this.asociado=null;
         notifyAll();
     }
@@ -84,7 +84,7 @@ public class Ambulancia extends Observable {
         this.ambulanciaState=new Disponible(this);
     }
 
-    public void pacienteSolicitaAtención() {	this.ambulanciaState.pacienteSolicitaAtención();    }
+    public void pacienteSolicitaAtención() {	this.ambulanciaState.pacienteSolicitaAtencion();    }
 
 
     //fijarse si hacer try/catch o propaga la excepcion

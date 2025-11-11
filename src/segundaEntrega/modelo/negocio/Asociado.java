@@ -21,8 +21,10 @@ public class Asociado extends Persona implements Runnable {
     }
     @Override
     public void run() {
-        for(int i=0;i<numsolicitudes;i++){
+        int i=0;
+        while(i<numsolicitudes && simulacionactiva){
             this.ambulancia.pacienteSolicitaAtencion(this);
+            i++;
         }
     }
 }
