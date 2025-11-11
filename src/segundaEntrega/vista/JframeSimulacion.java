@@ -19,10 +19,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class JframeSimulacion extends JFrame {
+public class JframeSimulacion extends JFrame implements IVistaSimulacion {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -166,4 +167,30 @@ public class JframeSimulacion extends JFrame {
         this.accionesAmbulancia.add(this.txtAmbulancia);
 
     }
+    public JTextField getCantSolicitudes(){
+        return this.cantSol; //esto eta bien asi tipo text field?
+    }
+    // para que el controlador actualice la vista(no se si esto deberia estar aca la verdad)
+    public void setEstadoAmbulancia(String estado) {
+        this.textAreaEstadoAmbulancia.setText(estado);
+    }
+
+    public void addAccionAmbulancia(String accion) {
+        this.txtAmbulancia.append(accion + "\n");
+    }
+
+    // para manejar la ventana
+    public void arranca() {
+        this.setVisible(true);
+    }
+
+    public void cerrar() {
+        this.dispose();
+    }
+    //para conectar al controlador
+    @Override
+    public void addActionListener(ActionListener l) {
+        this.btnIniciar.addActionListener(l);
+        this.btnFinalizar.addActionListener(l);
+    } //??? q onda esto
 }

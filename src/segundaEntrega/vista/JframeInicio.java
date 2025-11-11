@@ -1,20 +1,20 @@
 package testventanas;
 
+import segundaEntrega.vista.IVistaInicio;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JSplitPane;
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
-public class JframeInicio extends JFrame {
+public class JframeInicio extends JFrame implements IVistaInicio {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -77,6 +77,21 @@ public class JframeInicio extends JFrame {
         this.btnSim.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         this.botones.add(this.btnSim);
 
+    }
+
+    @Override
+    public void addActionListener(ActionListener l) {
+        this.btnBD.addActionListener(l);
+        this.btnSim.addActionListener(l);
+    }
+
+    @Override
+    public void arranca() {
+        this.setVisible(true);
+    }
+    @Override
+    public void cerrar() {
+        this.dispose();
     }
 
 }

@@ -1,8 +1,7 @@
 package ventana;
 
-import segundaEntrega.vista.IVista;
+import segundaEntrega.vista.IVistaPrincipal;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,9 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -21,9 +17,8 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Dimension;
 
-public class Jframeprincipal extends JFrame implements IVista {
+public class Jframeprincipal extends JFrame implements IVistaPrincipal {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -83,10 +78,6 @@ public class Jframeprincipal extends JFrame implements IVista {
         JButton btnComenzarSimulacion = new JButton("Comenzar Simulacion");
         btnComenzarSimulacion.setBackground(new Color(0, 64, 0));
         btnComenzarSimulacion.setForeground(new Color(0, 0, 0));
-        btnComenzarSimulacion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
 
         JLabel lblcantop = new JLabel("Cantidad de Operarios");
         lblcantop.setFont(new Font("Sitka Text", Font.PLAIN, 13));
@@ -121,6 +112,19 @@ public class Jframeprincipal extends JFrame implements IVista {
     {
         this.gbc_btnComenzarSimulacion.addActionListener(actionListener);
 
+    }
+    @Override
+    public void arranca() {
+        this.setVisible(true);
+    }
+    @Override
+    public void cerrar() {
+        this.dispose();
+    }
+
+    @Override
+    public JTextField getCantidadAsociados() {
+        return cantAsociados;
     }
 
 }
