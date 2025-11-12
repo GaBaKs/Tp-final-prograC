@@ -5,6 +5,7 @@ import clinica.modelo.personas.Persona;
 public class Operario extends Persona implements Runnable{
     protected int numsolicitudes;
     protected Ambulancia ambulancia;
+    static boolean simulacionactiva;
 
     public Operario(String dni, String n_A, String domicilio, String ciudad, String telefono, int numsolicitudes) {
         super(dni, n_A, domicilio, ciudad, telefono);

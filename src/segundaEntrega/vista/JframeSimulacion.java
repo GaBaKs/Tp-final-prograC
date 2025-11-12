@@ -193,4 +193,6 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.btnIniciar.addActionListener(l);
         this.btnFinalizar.addActionListener(l);
     } //??? q onda esto
+
+    //agregar boton de solicitar mantenimiento
 }

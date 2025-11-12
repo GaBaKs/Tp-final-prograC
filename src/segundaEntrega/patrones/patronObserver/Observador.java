@@ -25,3 +25,4 @@ public class Observador implements Observer {
         this.getObservable().notifyObservers(estado);
         this.observable = (Observable) o;
     }
+}

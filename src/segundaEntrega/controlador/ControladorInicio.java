@@ -3,6 +3,9 @@ package segundaEntrega.controlador;
 import segundaEntrega.modelo.InicioSimulacion;
 import segundaEntrega.vista.IVistaInicio;
 import segundaEntrega.vista.IVistaPrincipal;
+import segundaEntrega.vista.IVistaSimulacion;
+import segundaEntrega.vista.JframeSimulacion;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,14 +32,14 @@ public class ControladorInicio implements ActionListener {
             // oculto la vista de inicio
             this.vista.cerrar();
 
-            IVistaPrincipal vistaprincipal = new ventana.Jframeprincipal();
+            IVistaSimulacion vistasimulacion = new JframeSimulacion();
             InicioSimulacion modeloInicioSimulacion = new InicioSimulacion(); //el controlador deberia conocer esto no?
 
             // creo el controlador de principal y le paso vista y modelo
-            ControladorPrincipal contprincipal = new ControladorPrincipal(vistaprincipal, modeloInicioSimulacion);
+            ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, modeloInicioSimulacion);
 
             // muestro la vista de la somulacion
-            vistaprincipal.arranca();
+            vistasimulacion.arranca();
 
         } else if (comando.equals("Modulo base de datos")) {
             //idem pero p crear la vista de asociados

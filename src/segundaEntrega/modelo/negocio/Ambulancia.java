@@ -1,6 +1,5 @@
 package segundaEntrega.modelo.negocio;
 
-import clinica.modelo.personas.pacientes.Paciente;
 import excepciones.AtendiendoDomicilioExcepcion;
 import excepciones.EnTallerExcepcion;
 import excepciones.RegresandoSinPacienteExcepcion;
@@ -9,7 +8,6 @@ import excepciones.TrasladandoPacienteExcepcion;
 import segundaEntrega.patrones.patronState.Disponible;
 import segundaEntrega.patrones.patronState.IState;
 
-import java.util.ArrayList;
 import java.util.Observable;
 
 public class Ambulancia extends Observable {
@@ -84,7 +82,7 @@ public class Ambulancia extends Observable {
         this.ambulanciaState=new Disponible(this);
     }
 
-    public void pacienteSolicitaAtención() {	this.ambulanciaState.pacienteSolicitaAtencion();    }
+    public void pacienteSolicitaAtención() {	this.ambulanciaState.pacienteSolicitaAtencion(asociado);    }
 
 
     //fijarse si hacer try/catch o propaga la excepcion

@@ -3,6 +3,7 @@ package segundaEntrega.controlador;
 import segundaEntrega.modelo.InicioSimulacion;
 import segundaEntrega.vista.IVistaSimulacion;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -11,6 +12,7 @@ import java.util.Observer;
 public class ControladorSimulacion implements ActionListener, Observer {
     private InicioSimulacion inicioSimulacion;
     private IVistaSimulacion vista;
+    protected boolean simulacionactiva=false;
 
     public ControladorSimulacion(IVistaSimulacion vista, InicioSimulacion inicioSimulacion)
     {
@@ -26,10 +28,16 @@ public class ControladorSimulacion implements ActionListener, Observer {
 
         if (comando.equals("Iniciar")) {
             // Le dice al modelo que comience la simulación (inicie los hilos)
-            this.inicioSimulacion.inicia();
+            JTextField cantsolicitudes = vista.getCantSolicitudes();
+            int cantsolicitudesInicial = Integer.parseInt(cantsolicitudes.getText());
+            //cambio a int
+            this.inicioSimulacion.inicia(cantsolicitudesInicial);
 
         } else if (comando.equals("Finalizar")) {
             this.inicioSimulacion.finalizar();
+        }
+        else if (comando.equals("Solicitar mantenimiento")) {
+            this.inicioSimulacion.solicitudMantenimiento();
         }
     }
 

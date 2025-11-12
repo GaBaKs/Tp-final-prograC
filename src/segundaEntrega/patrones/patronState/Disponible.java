@@ -1,17 +1,26 @@
 package segundaEntrega.patrones.patronState;
 
+import segundaEntrega.modelo.negocio.Ambulancia;
+import segundaEntrega.modelo.negocio.Asociado;
+
 public class Disponible implements IState {
-    Ambulancia ambulancia;
+    private Ambulancia ambulancia;
 
     public Disponible(Ambulancia a)
     {
+
         this.ambulancia=a;
     }
 
     @Override
-    public void pacienteSolicitaAtención()
+    public void pacienteSolicitaAtencion(Asociado asociado)
     {
         this.ambulancia.ambulanciaState=new AtendiendoDomicilio(this.ambulancia);	//ambulancia pasa al estado de atencion a domicilio(preguntar por domicilio)
+    }
+
+    @Override
+    public void pacienteSolicitaAtencion(Asociado asociado) {
+
     }
 
     @Override
