@@ -15,18 +15,13 @@ public class Disponible implements IState {
     @Override
     public void pacienteSolicitaAtencion(Asociado asociado)
     {
-        this.ambulancia.ambulanciaState=new AtendiendoDomicilio(this.ambulancia);	//ambulancia pasa al estado de atencion a domicilio(preguntar por domicilio)
+        this.ambulancia.setAmbulanciaState(new AtendiendoDomicilio(this.ambulancia));	//ambulancia pasa al estado de atencion a domicilio(preguntar por domicilio)
     }
 
     @Override
-    public void pacienteSolicitaAtencion(Asociado asociado) {
-
-    }
-
-    @Override
-    public void pacienteSolicitaTraslado()
+    public void pacienteSolicitaTraslado(Asociado asociado)
     {
-        this.ambulancia.ambulanciaState=new TrasladandoPaciente(this.ambulancia);				//fijarse para agregar un paciente
+        this.ambulancia.setAmbulanciaState(ambulanciaState=new TrasladandoPaciente(this.ambulancia));				//fijarse para agregar un paciente
     }
 
     @Override

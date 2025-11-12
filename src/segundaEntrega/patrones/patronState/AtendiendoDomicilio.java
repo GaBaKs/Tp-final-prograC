@@ -9,6 +9,7 @@ public class AtendiendoDomicilio implements IState {
     public AtendiendoDomicilio(Ambulancia a)
     {
         this.ambulancia=a;
+
     }
 
     @Override
