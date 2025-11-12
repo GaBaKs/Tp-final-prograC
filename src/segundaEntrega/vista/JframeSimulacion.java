@@ -43,6 +43,16 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panel_2;
     private JLabel lblCantSol;
     private JTextField cantSol;
+
+    @Override
+    public JPanel getContentPane() {
+        return contentPane;
+    }
+
+    public void setContentPane(JPanel contentPane) {
+        this.contentPane = contentPane;
+    }
+
     private JPanel panel_3;
     private JLabel lblEstadoAmbulancia;
     private JTextArea textAreaEstadoAmbulancia;
@@ -55,22 +65,6 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel panel_1;
     private JButton btnSolMan;
     private JPanel SolMan;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    JframeSimulacion frame = new JframeSimulacion();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the frame.

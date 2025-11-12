@@ -13,6 +13,8 @@ import java.util.Observable;
 public class Ambulancia extends Observable {
     private Operario operario;
     protected IState ambulanciaState;
+    private String estadoString;
+
     //agregar paciente para su traslado
     protected Asociado asociado=null;
     protected boolean mantenimiento=false;
@@ -30,18 +32,13 @@ public class Ambulancia extends Observable {
         while (this.asociado != null || this.mantenimiento == true  )
         {
             try {
-                this.setChanged();
-                this.notifyObservers(asociado.getN_A() + "Esta esperando a ser atendido a domicilio por la ambulancia.");
                 wait();
             } catch (InterruptedException e) {e.printStackTrace();}
         }
         this.ambulanciaState.pacienteSolicitaAtencion(asociado);
         this.asociado = asociado;
         this.setChanged();
-        this.notifyObservers(asociado.getN_A()+" esta siendo atendido a domicilio por la ambulancia.");//en el state
-        //no se como simular la atencion xd deberia hacerlo en otra funcion?
-        setChanged();
-        this.notifyObservers(asociado.getN_A()+" termino de ser atendido a domicilio por la ambulancia."); //esto iria en el state y habria q cambiar el asociado a null aca
+        this.notifyObservers(ambulanciaState);//en el state
         this.asociado=null;
         notifyAll();
     }
@@ -103,5 +100,20 @@ public class Ambulancia extends Observable {
         this.ambulanciaState.solicitudMantenimiento();
     }
 
+    public IState getAmbulanciaState() {
+        return ambulanciaState;
+    }
+
+    public void setAmbulanciaState(IState ambulanciaState) {
+        this.ambulanciaState = ambulanciaState;
+    }
+
+    public String getEstadoString() {
+        return estadoString;
+    }
+
+    public void setEstadoString(String estadoString) {
+        this.estadoString = estadoString;
+    }
 
 }
