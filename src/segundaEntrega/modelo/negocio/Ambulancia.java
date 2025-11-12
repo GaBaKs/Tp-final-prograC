@@ -18,6 +18,13 @@ public class Ambulancia extends Observable {
     protected boolean mantenimiento=false;
     private int numsolicitudes;
 
+    public Ambulancia()
+    {
+        this.ambulanciaState=new Disponible(this);
+    }
+
+
+
     public synchronized void pacienteSolicitaAtencion (Asociado asociado)
     {
         while (this.asociado != null || this.mantenimiento == true  )
@@ -75,11 +82,6 @@ public class Ambulancia extends Observable {
         this.ambulanciaState.solicitudMantenimiento();
         this.mantenimiento = false;
         notifyAll();
-    }
-
-    public Ambulancia()
-    {
-        this.ambulanciaState=new Disponible(this);
     }
 
     public void pacienteSolicitaAtención() {	this.ambulanciaState.pacienteSolicitaAtencion(asociado);    }

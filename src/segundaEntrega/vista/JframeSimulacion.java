@@ -22,6 +22,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
 
 public class JframeSimulacion extends JFrame implements IVistaSimulacion {
 
@@ -37,13 +39,22 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
     private JPanel izquierda;
     private JButton btnIniciar;
     private JButton btnFinalizar;
-    private JPanel panel_1;
+    private JPanel sim;
     private JPanel panel_2;
-    private JLabel lblNewLabel;
+    private JLabel lblCantSol;
     private JTextField cantSol;
     private JPanel panel_3;
     private JLabel lblEstadoAmbulancia;
     private JTextArea textAreaEstadoAmbulancia;
+    private JLabel lblCantAsociados;
+    private JTextField cantAso;
+    private JScrollPane scrollPane_1;
+    private JPanel panel_4;
+    private JLabel lblN_M;
+    private JTextField textFieldN_M;
+    private JPanel panel_1;
+    private JButton btnSolMan;
+    private JPanel SolMan;
 
     /**
      * Launch the application.
@@ -66,7 +77,7 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
      */
     public JframeSimulacion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 930, 711);
+        setBounds(100, 100, 871, 515);
         this.contentPane = new JPanel();
         this.contentPane.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,6 +114,23 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.operario.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         this.izquierda.add(this.operario);
         this.operario.setBorder(new TitledBorder(null, "Operario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        this.operario.setLayout(new GridLayout(2, 0, 0, 0));
+
+        this.panel_1 = new JPanel();
+        this.operario.add(this.panel_1);
+
+        this.lblN_M = new JLabel("Nombre y apellido");
+        this.panel_1.add(this.lblN_M);
+
+        this.textFieldN_M = new JTextField();
+        this.panel_1.add(this.textFieldN_M);
+        this.textFieldN_M.setColumns(10);
+
+        this.SolMan = new JPanel();
+        this.operario.add(this.SolMan);
+
+        this.btnSolMan = new JButton("Solicitar mantenimiento");
+        this.SolMan.add(this.btnSolMan);
 
         this.estadoAmbulancia = new JPanel();
         this.estadoAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -111,15 +139,22 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.estadoAmbulancia.setLayout(new GridLayout(0, 1, 0, 0));
 
         this.panel_3 = new JPanel();
+        FlowLayout flowLayout = (FlowLayout) this.panel_3.getLayout();
+        flowLayout.setAlignment(FlowLayout.LEFT);
         this.estadoAmbulancia.add(this.panel_3);
 
         this.lblEstadoAmbulancia = new JLabel("Estado de la ambulancia:");
+        this.lblEstadoAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 19));
         this.lblEstadoAmbulancia.setVerticalAlignment(SwingConstants.BOTTOM);
         this.lblEstadoAmbulancia.setHorizontalAlignment(SwingConstants.LEFT);
         this.panel_3.add(this.lblEstadoAmbulancia);
 
         this.textAreaEstadoAmbulancia = new JTextArea();
+        this.textAreaEstadoAmbulancia.setEditable(false);
         this.panel_3.add(this.textAreaEstadoAmbulancia);
+
+        this.panel_4 = new JPanel();
+        this.izquierda.add(this.panel_4);
 
 
         this.simulacion = new JPanel();
@@ -135,17 +170,24 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
 
 
         this.panel.add(this.simulacion, gbc_simulacion);
-        this.simulacion.setLayout(new GridLayout(1, 0, 0, 0));
+        this.simulacion.setLayout(new GridLayout(0, 2, 0, 0));
 
-        this.panel_1 = new JPanel();
-        this.simulacion.add(this.panel_1);
+        this.sim = new JPanel();
+        this.simulacion.add(this.sim);
 
-        this.lblNewLabel = new JLabel("Cantidad de solicitudes");
-        this.panel_1.add(this.lblNewLabel);
+        this.lblCantSol = new JLabel("Cantidad de solicitudes");
+        this.sim.add(this.lblCantSol);
 
         this.cantSol = new JTextField();
-        this.panel_1.add(this.cantSol);
+        this.sim.add(this.cantSol);
         this.cantSol.setColumns(10);
+
+        this.lblCantAsociados = new JLabel("Cantidad de asociados");
+        this.sim.add(this.lblCantAsociados);
+
+        this.cantAso = new JTextField();
+        this.sim.add(this.cantAso);
+        this.cantAso.setColumns(10);
 
         this.panel_2 = new JPanel();
         this.simulacion.add(this.panel_2);
@@ -161,10 +203,13 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.contentPane.add(this.accionesAmbulancia);
         this.accionesAmbulancia.setBorder(new TitledBorder(null, "Acciones de la ambulancia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
+        this.scrollPane_1 = new JScrollPane();
+        this.accionesAmbulancia.add(this.scrollPane_1);
+
         this.txtAmbulancia = new JTextArea();
+        this.txtAmbulancia.setEditable(false);
+        this.scrollPane_1.setViewportView(this.txtAmbulancia);
         this.txtAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        this.txtAmbulancia.setText("Aca van escritas las acciones de la ambulancia");
-        this.accionesAmbulancia.add(this.txtAmbulancia);
 
     }
     public JTextField getCantSolicitudes(){
