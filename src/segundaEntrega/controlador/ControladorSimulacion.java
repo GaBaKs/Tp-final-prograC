@@ -12,7 +12,6 @@ import java.util.Observer;
 public class ControladorSimulacion implements ActionListener, Observer {
     private InicioSimulacion inicioSimulacion;
     private IVistaSimulacion vista;
-    protected boolean simulacionactiva=false;
 
     public ControladorSimulacion(IVistaSimulacion vista, InicioSimulacion inicioSimulacion)
     {

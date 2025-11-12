@@ -2,7 +2,6 @@ package segundaEntrega.controlador;
 
 import segundaEntrega.modelo.InicioSimulacion;
 import segundaEntrega.vista.IVistaInicio;
-import segundaEntrega.vista.IVistaPrincipal;
 import segundaEntrega.vista.IVistaSimulacion;
 import segundaEntrega.vista.JframeSimulacion;
 
