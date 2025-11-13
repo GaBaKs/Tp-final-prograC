@@ -10,22 +10,23 @@ public class EnTaller	implements IState {
     public EnTaller(Ambulancia a)
     {
         this.ambulancia=a;
+        this.ambulancia.setDisponible(false);
+        this.ambulancia.setEstaMantenimiento(true);
     }
 
     @Override
-    public void pacienteSolicitaAtencion(Asociado asociado) {
-    }
+    public void pacienteSolicitaAtencion(Asociado asociado) {}// no entra porque esta en mantenimiento
 
     @Override
-    public void pacienteSolicitaTraslado(Asociado asociado) throws EnTallerExcepcion {throw new EnTallerExcepcion();}	// informa que no puede
+    public void pacienteSolicitaTraslado(Asociado asociado){}	// informa que no puede
 
     @Override
-    public void retornoAutomatico() {}		//permanece en el mismo estado
+    public void retornoAutomatico(){}		// no entra porque esta en mantenimiento
 
     @Override
     public void solicitudMantenimiento()
     {
-        this.ambulancia.ambulanciaState=new RegresandoTaller(this.ambulancia);
+        this.ambulancia.setAmbulanciaState(new RegresandoTaller(this.ambulancia));
     }
 
 }

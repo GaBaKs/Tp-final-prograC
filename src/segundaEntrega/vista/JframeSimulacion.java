@@ -1,19 +1,13 @@
 package segundaEntrega.vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import javax.swing.border.BevelBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -30,8 +24,8 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JPanel Principal;
-    private JPanel accionesAmbulancia;
-    private JTextArea txtAmbulancia;
+    private JPanel movimientosAsociado;
+    private JTextArea txtAsociado;
     private JPanel panel;
     private JPanel operario;
     private JPanel estadoAmbulancia;
@@ -192,30 +186,32 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.btnFinalizar = new JButton("Finalizar");
         this.panel_2.add(this.btnFinalizar);
 
-        this.accionesAmbulancia = new JPanel();
-        this.accionesAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        this.contentPane.add(this.accionesAmbulancia);
-        this.accionesAmbulancia.setBorder(new TitledBorder(null, "Acciones de la ambulancia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        this.movimientosAsociado = new JPanel();
+        this.movimientosAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        this.contentPane.add(this.movimientosAsociado);
+        this.movimientosAsociado.setBorder(new TitledBorder(null, "Notificaciones del Asociado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
         this.scrollPane_1 = new JScrollPane();
-        this.accionesAmbulancia.add(this.scrollPane_1);
+        this.movimientosAsociado.add(this.scrollPane_1);
 
-        this.txtAmbulancia = new JTextArea();
-        this.txtAmbulancia.setEditable(false);
-        this.scrollPane_1.setViewportView(this.txtAmbulancia);
-        this.txtAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        this.txtAsociado = new JTextArea();
+        this.txtAsociado.setEditable(false);
+        this.scrollPane_1.setViewportView(this.txtAsociado);
+        this.txtAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
     }
     public JTextField getCantSolicitudes(){
         return this.cantSol; //esto eta bien asi tipo text field?
     }
     // para que el controlador actualice la vista(no se si esto deberia estar aca la verdad)
-    public void setEstadoAmbulancia(String estado) {
+    public void setEstadoAmbulancia(String estado)
+    {
         this.textAreaEstadoAmbulancia.setText(estado);
+        assert estado!=null:"no puede tener un string nulo";
     }
 
     public void addAccionAmbulancia(String accion) {
-        this.txtAmbulancia.append(accion + "\n");
+        this.txtAsociado.append(accion + "\n");
     }
 
     // para manejar la ventana
@@ -226,12 +222,22 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
     public void cerrar() {
         this.dispose();
     }
+
+    public void appendMovimientosAsociados(String mensaje)
+    {
+        this.txtAsociado.append(mensaje+"\n");
+    }
+
+    public JTextField getNombreyApellido() {
+        return this.textFieldN_M;
+    }
+
     //para conectar al controlador
     @Override
     public void addActionListener(ActionListener l) {
         this.btnIniciar.addActionListener(l);
         this.btnFinalizar.addActionListener(l);
-    } //??? q onda esto
+    }
 
     //agregar boton de solicitar mantenimiento
 }

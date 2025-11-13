@@ -10,6 +10,8 @@ public class Disponible implements IState {
     {
 
         this.ambulancia=a;
+        this.ambulancia.setEstaMantenimiento(false);
+        this.ambulancia.setDisponible(true);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class Disponible implements IState {
     @Override
     public void pacienteSolicitaTraslado(Asociado asociado)
     {
-        this.ambulancia.setAmbulanciaState(ambulanciaState=new TrasladandoPaciente(this.ambulancia));				//fijarse para agregar un paciente
+        this.ambulancia.setAmbulanciaState(new TrasladandoPaciente(this.ambulancia));
     }
 
     @Override
@@ -30,7 +32,7 @@ public class Disponible implements IState {
     @Override
     public void solicitudMantenimiento()
     {
-        this.ambulancia.ambulanciaState=new EnTaller(this.ambulancia);			// a taller
+        this.ambulancia.setAmbulanciaState(new EnTaller(this.ambulancia));			// a taller
     }
 
 }

@@ -10,6 +10,8 @@ public interface IVistaSimulacion {
     public JTextField getCantSolicitudes();
     public void addAccionAmbulancia(String accion);
     public void setEstadoAmbulancia(String estado);
+    public void appendMovimientosAsociados(String mensaje);
+    public JTextField getNombreyApellido();
     //get selected person ?? ni idea
     //actualizar lista
 

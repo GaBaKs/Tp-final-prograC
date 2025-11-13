@@ -14,18 +14,28 @@ public class Asociado extends Persona implements Runnable {
         super(dni,n_A,domicilio,ciudad,telefono);
         this.numsolicitudes = numsolicitudes;
         this.ambulancia = ambulancia;
+        assert ambulancia!=null :"no existe la ambulancia";
     }
+
     public int getNumasolicitudes() {
         return numsolicitudes;
     }
-    public void setNumasolicitudes(int numsolicitudes) {
+
+    public void setNumasolicitudes(int numsolicitudes)
+    {
         this.numsolicitudes = numsolicitudes;
+        assert this.numsolicitudes>=0:"la cantidad de solicitudes no puede ser negativa";
     }
+
     @Override
     public void run() {
         int i=0;
         while( i < numsolicitudes && simulacionactiva){
-            this.ambulancia.pacienteSolicitaAtencion(this);
+            try {
+                this.ambulancia.pacienteSolicitaAtencion(this);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             i++;
         }
     }

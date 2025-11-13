@@ -9,6 +9,8 @@ public class RegresandoTaller implements IState {
     public RegresandoTaller(Ambulancia a)
     {
         this.ambulancia=a;
+        this.ambulancia.setDisponible(false);
+        this.ambulancia.setEstaMantenimiento(true);
     }
 
     @Override
@@ -17,15 +19,15 @@ public class RegresandoTaller implements IState {
     }
 
     @Override
-    public void pacienteSolicitaTraslado(Asociado asociado) throws RegresandoTallerExcepcion{throw new RegresandoTallerExcepcion();}		//informa que no puede
+    public void pacienteSolicitaTraslado(Asociado asociado) {}
 
     @Override
     public void retornoAutomatico()
     {
-        this.ambulancia.ambulanciaState=new Disponible(this.ambulancia);
+        this.ambulancia.setAmbulanciaState(new Disponible(this.ambulancia));
     }
 
     @Override
-    public void solicitudMantenimiento() throws RegresandoTallerExcepcion{throw new RegresandoTallerExcepcion();}		//informa que no puede
+    public void solicitudMantenimiento() {}
 
 }

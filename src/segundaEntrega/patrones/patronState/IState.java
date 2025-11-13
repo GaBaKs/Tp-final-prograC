@@ -11,9 +11,10 @@ public interface IState {
 
     public void pacienteSolicitaAtencion(Asociado asociado) ;
 
-    public void pacienteSolicitaTraslado(Asociado asociado) throws AtendiendoDomicilioExcepcion,TrasladandoPacienteExcepcion,EnTallerExcepcion,RegresandoTallerExcepcion ;
+    public void pacienteSolicitaTraslado(Asociado asociado) ;
 
     public void retornoAutomatico();
 
-    public void solicitudMantenimiento() throws AtendiendoDomicilioExcepcion,TrasladandoPacienteExcepcion,RegresandoTallerExcepcion,RegresandoSinPacienteExcepcion;
+    public void solicitudMantenimiento();
+
 }

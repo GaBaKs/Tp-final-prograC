@@ -9,20 +9,23 @@ public class TrasladandoPaciente implements IState {
     public TrasladandoPaciente(Ambulancia a)
     {
         this.ambulancia=a;
+        this.ambulancia.setEstaMantenimiento(false);
+        this.ambulancia.setDisponible(false);
     }
 
     @Override
-    public void pacienteSolicitaTraslado(Asociado asociado) throws TrasladandoPacienteExcepcion {throw new TrasladandoPacienteExcepcion();}		//tiene que notificar que no puede (ver si lanza excepcion)
+    public void pacienteSolicitaAtencion(Asociado asociado) {}  //mantiene su estado
 
     @Override
-    public void pacienteSolicitaAtencion(Asociado asociado) {
+    public void pacienteSolicitaTraslado(Asociado asociado){}    // no llega nunca
 
+    @Override
+    public void retornoAutomatico()
+    {
+        this.ambulancia.setAmbulanciaState(new Disponible(this.ambulancia));
     }
 
     @Override
-    public void retornoAutomatico() {}			//permanece en el mismo estado
-
-    @Override
-    public void solicitudMantenimiento() throws TrasladandoPacienteExcepcion {throw new TrasladandoPacienteExcepcion();}	// tiene que notificar que no puede (ver si lanza excepcion)
+    public void solicitudMantenimiento()  {} //no llega nunca aca
 
 }

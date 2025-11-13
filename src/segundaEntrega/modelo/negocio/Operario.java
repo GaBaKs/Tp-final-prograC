@@ -15,15 +15,22 @@ public class Operario extends Persona implements Runnable{
     public Ambulancia getAmbulancia() {
         return ambulancia;
     }
-    public void setAmbulancia(Ambulancia ambulancia) {
+
+    public void setAmbulancia(Ambulancia ambulancia)
+    {
         this.ambulancia = ambulancia;
+        assert ambulancia!=null :"no existe la ambulancia";
     }
 
     @Override
     public void run() {
         int i=0;
         while(i<numsolicitudes && simulacionactiva){
-            this.ambulancia.solicitaMantenimiento(this);
+            try {
+                this.ambulancia.solicitaMantenimiento(this);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             i++;
         }
     }
