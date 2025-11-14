@@ -8,5 +8,6 @@ public interface IDAOAsociado {
     void bajaAsociado(DTOAsociado dto) throws Exception;
     void altaAsociado(DTOAsociado dto) throws Exception;
     void inicializarDB() throws Exception;
+    void guardarTodo(ArrayList<DTOAsociado> lista) throws Exception;
 
 }

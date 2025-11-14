@@ -8,21 +8,15 @@ import segundaEntrega.persistencia.DAOAsociadoYDTO.IDAOAsociado;
 import java.util.ArrayList;
 
 public class Sistema {
-    // ... tus atributos existentes (medicos, pacientes, etc.) ...
-
-    // 1. Nuevos atributos para la Etapa 2
     private ArrayList<Asociado> asociadosSistema;
     private IDAOAsociado asociadoDAO;
-    private Ambulancia ambulancia; // Necesaria para crear Asociados
+    private Ambulancia ambulancia;
 
     public Sistema() {
-        // ... inicialización existente ...
-
         this.asociadosSistema = new ArrayList<>();
         this.asociadoDAO = new DAOAsociado();
         this.ambulancia = new Ambulancia(); // Instancia única del sistema
 
-        // CARGA INICIAL AUTOMÁTICA
         try {
             cargarAsociadosDesdeBD();
         } catch (Exception e) {
@@ -30,9 +24,7 @@ public class Sistema {
         }
     }
 
-    // --- MÉTODOS DE PERSISTENCIA Y CONVERSIÓN ---
-
-    // Convierte de DTO (BD) a Modelo (Negocio)
+    // pasa de dto a objeto asociado
     private Asociado fromDTO(DTOAsociado dto) {
         return new Asociado(
                 dto.getDni(),
@@ -45,7 +37,7 @@ public class Sistema {
         );
     }
 
-    // Convierte de Modelo (Negocio) a DTO (BD)
+    // al reves
     private DTOAsociado toDTO(Asociado asociado) {
         return new DTOAsociado(
                 asociado.getDni(),
@@ -88,10 +80,11 @@ public class Sistema {
     }
 
     public void eliminarAsociado(Asociado asociado) throws Exception {
-        // 1. Eliminar de memoria
+        // elimino d memoria
         if (asociadosSistema.remove(asociado)) {
-            // 2. Eliminar de BD
-            asociadoDAO.eliminar(asociado.getDni()); // Asumiendo que el DAO tiene eliminar por DNI
+            DTOAsociado dto = this.toDTO(asociado); //paso de objeto a dto
+            // elimino de la base de datos
+            asociadoDAO.bajaAsociado(dto); // Asumiendo que el DAO tiene eliminar por DNI
         } else {
             throw new Exception("Asociado no encontrado");
         }

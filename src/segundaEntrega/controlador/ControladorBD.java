@@ -60,8 +60,9 @@ public class ControladorBD implements ActionListener {
 
             // 4. Actualizar la vista y limpiar
             vista.actualizaLista(modelo.getAsociadosSistema());
+            //esto es lo q hay q mostrat x pantalla
             JOptionPane.showMessageDialog(null, "Asociado agregado exitosamente");
-            // Aquí podrías llamar a un método vista.limpiarCampos()
+
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al agregar: " + ex.getMessage());

@@ -217,6 +217,7 @@ public class JframeBD extends JFrame implements IVistaBD
 
         this.modeloLista=new DefaultListModel<Asociado>();
         this.list.setModel(this.modeloLista);
+        this.panelListado.add(new JScrollPane(list));
 
     }
     @Override
@@ -279,9 +280,12 @@ public class JframeBD extends JFrame implements IVistaBD
 
     public JPanel getJPanel(){ return this.panelPrincipal;}
 
-    public void actualizaLista(ArrayList<Asociado> asociadosSistema)
-    {
-
+    @Override
+    public void actualizaLista(ArrayList<Asociado> listaAsociados) {
+        this.modeloLista.clear();
+        for (Asociado a : listaAsociados) {
+            this.modeloLista.addElement(a);
+        }
+        this.repaint();
     }
-
 }

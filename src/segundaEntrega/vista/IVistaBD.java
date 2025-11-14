@@ -25,6 +25,5 @@ public interface IVistaBD {
     public Asociado getAsociadoSeleccionado();
 
     public JPanel getJPanel(); //aplicado para el JOptionPanel.showDialog() que necesita un component
-
     public void actualizaLista(ArrayList<Asociado> asociadosSistema);
 }

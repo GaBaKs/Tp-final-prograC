@@ -114,4 +114,58 @@ public class DAOAsociado implements IDAOAsociado
     public void inicializarDB() throws Exception {
         String sqlCreate = "CREATE TABLE IF NOT EXISTS asociados (...)";
     }
+    @Override
+    public void guardarTodo(ArrayList<DTOAsociado> lista) throws Exception {
+        Connection con = null;
+        PreparedStatement psDelete = null;
+        PreparedStatement psInsert = null;
+
+        try {
+            con = ConexionBD.getInstance().getConnection();
+
+            // desactivamos el guardado automático
+            con.setAutoCommit(false);
+
+            // borrar todos los datos existentes en la tabla
+            String sqlDelete = "DELETE FROM asociados";
+            psDelete = con.prepareStatement(sqlDelete);
+            psDelete.executeUpdate();
+
+            // insertar los datos de la lista (uno por uno)
+            String sqlInsert = "INSERT INTO asociados (dni, nombre, domicilio, ciudad, telefono, numSolicitudes) VALUES (?, ?, ?, ?, ?, ?)";
+            psInsert = con.prepareStatement(sqlInsert);
+
+            for (DTOAsociado dto : lista) {
+                psInsert.setString(1, dto.getDni());
+                psInsert.setString(2, dto.getNombreApellido());
+                psInsert.setString(3, dto.getDomicilio());
+                psInsert.setString(4, dto.getCiudad());
+                psInsert.setString(5, dto.getTelefono());
+                psInsert.setInt(6, dto.getNumSolicitudes());
+
+                // ejecutamos la inserción de este asociado
+                psInsert.executeUpdate();
+            }
+
+            // confirmamos los cambios
+            con.commit();
+
+        } catch (SQLException e) {
+            // si hubo error deshace toodo p no perder datos
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw new Exception("Error al guardar todo: " + e.getMessage());
+        } finally {
+            // Restauramos el autoCommit por si se reutiliza la conexión ?? ni puta idea
+            if (con != null) con.setAutoCommit(true);
+
+            if (psDelete != null) psDelete.close();
+            if (psInsert != null) psInsert.close();
+        }
+    }
 }
