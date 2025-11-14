@@ -1,6 +1,6 @@
 package segundaEntrega.modelo.negocio;
 import clinica.modelo.personas.Persona;
-
+import java.util.Random;
 import java.util.ArrayList;
 
 
@@ -8,7 +8,8 @@ public class Asociado extends Persona implements Runnable {
     protected int numsolicitudes;
     protected Ambulancia ambulancia;
     static boolean simulacionactiva;
-
+    Random random = new Random();
+    int numero;
 
     public Asociado(String dni, String n_A, String domicilio, String ciudad,String telefono,int numsolicitudes, Ambulancia ambulancia) {
         super(dni,n_A,domicilio,ciudad,telefono);
@@ -31,8 +32,12 @@ public class Asociado extends Persona implements Runnable {
     public void run() {
         int i=0;
         while( i < numsolicitudes && simulacionactiva){
+            numero=random.nextInt(2) + 1;
             try {
-                this.ambulancia.pacienteSolicitaAtencion(this);
+                if (numero==1)
+                 this.ambulancia.pacienteSolicitaAtencion(this);
+                else
+                    this.ambulancia.pacienteSolicitaTraslado(this);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

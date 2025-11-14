@@ -1,31 +1,16 @@
 package segundaEntrega.vista;
 
 import segundaEntrega.modelo.negocio.Asociado;
-import segundaEntrega.vista.IVistaBD;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class JframeBD extends JFrame implements IVistaBD
 {
@@ -71,6 +56,9 @@ public class JframeBD extends JFrame implements IVistaBD
     private JPanel bajaAsociado;
     private JPanel borrarDB;
     private JButton btnBorrarDB;
+    private DefaultListModel<Asociado> modeloLista;
+
+
 
     /**
      * Create the frame.
@@ -224,8 +212,11 @@ public class JframeBD extends JFrame implements IVistaBD
         this.panelPrincipal.add(this.panelListado);
         this.panelListado.setLayout(new GridLayout(0, 1, 0, 0));
 
-        this.list = new JList();
+        this.list = new JList<Asociado>();
         this.panelListado.add(this.list);
+
+        this.modeloLista=new DefaultListModel<Asociado>();
+        this.list.setModel(this.modeloLista);
 
     }
     @Override
@@ -276,6 +267,21 @@ public class JframeBD extends JFrame implements IVistaBD
     public JTextField getCalle()
     {
         return this.textFieldCalle;
+    }
+
+    public Asociado getAsociadoSeleccionado() { return (Asociado)this.list.getSelectedValue(); }
+
+    public JButton getbtnAltaAsociados(){return this.btnAltaAsociados;}
+
+    public JButton getbtnBajaAsociados(){return this.btnBajaAsociados;}
+
+    public JButton getbtnBorrarDB(){return this.btnBorrarDB;}
+
+    public JPanel getJPanel(){ return this.panelPrincipal;}
+
+    public void actualizaLista(ArrayList<Asociado> asociadosSistema)
+    {
+
     }
 
 }

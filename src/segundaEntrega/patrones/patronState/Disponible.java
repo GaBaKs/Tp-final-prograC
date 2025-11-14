@@ -17,7 +17,7 @@ public class Disponible implements IState {
     @Override
     public void pacienteSolicitaAtencion(Asociado asociado)
     {
-        this.ambulancia.setAmbulanciaState(new AtendiendoDomicilio(this.ambulancia));	//ambulancia pasa al estado de atencion a domicilio(preguntar por domicilio)
+        this.ambulancia.setAmbulanciaState(new AtendiendoDomicilio(this.ambulancia)); //ambulancia pasa al estado de atencion a domicilio(preguntar por domicilio)
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Disponible implements IState {
     @Override
     public void solicitudMantenimiento()
     {
-        this.ambulancia.setAmbulanciaState(new EnTaller(this.ambulancia));			// a taller
+        this.ambulancia.setAmbulanciaState(new EnTaller(this.ambulancia)); // a taller
     }
 
 }
