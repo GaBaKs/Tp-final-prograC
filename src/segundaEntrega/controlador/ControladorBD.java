@@ -31,7 +31,10 @@ public class ControladorBD implements ActionListener {
             this.altaAsociado();
         } else if (comando.equalsIgnoreCase("Baja asociado")) {
             this.bajaAsociado();
+        } else if (comando.equalsIgnoreCase("Agrega datos de prueba")){
+            this.agregaDatosPrueba();
         } else if (comando.equalsIgnoreCase("Borrar DB")) {
+
 
         }
     }
@@ -60,7 +63,7 @@ public class ControladorBD implements ActionListener {
             // Delegar al Modelo (que guardará en memoria y BD)
             modelo.agregarAsociado(toDTO(nuevoAsociado));
 
-            // 4. Actualizar la vista y limpiar
+            // Actualizar la vista y limpiar
             vista.actualizaLista(modelo.getAsociados());
             //esto es lo q hay q mostrat x pantalla
             JOptionPane.showMessageDialog(null, "Asociado agregado exitosamente");
@@ -90,6 +93,30 @@ public class ControladorBD implements ActionListener {
             }
         }
     }
+
+    public void agregaDatosPrueba(){
+        try {
+            Asociado asociado1= new Asociado("12345623","Pipo","Florisbelo 2738","Mar Del Plata","2235379123",4,modelo.getAmbulanciaCompartida());
+            modelo.agregarAsociado(toDTO(asociado1));
+            Asociado asociado2= new Asociado("29371910","Pepe","Independencia 5792","Mar Del Plata","2235279023",4,modelo.getAmbulanciaCompartida());
+            modelo.agregarAsociado(toDTO(asociado2));
+            Asociado asociado3= new Asociado("45921891","Pepo","Chacabuco 3761","Mar Del Plata","2234379023",4,modelo.getAmbulanciaCompartida());
+            modelo.agregarAsociado(toDTO(asociado3));
+            Asociado asociado4= new Asociado("43861537","Papo","Brown 4829","Mar Del Plata","2235378023",4,modelo.getAmbulanciaCompartida());
+            modelo.agregarAsociado(toDTO(asociado4));
+            Asociado asociado5= new Asociado("46919022","Pupo","Calle 4 290","Mar Del Plata","2235379023",4,modelo.getAmbulanciaCompartida());
+            modelo.agregarAsociado(toDTO(asociado5));
+
+            // Actualizar la vista y limpiar
+            vista.actualizaLista(modelo.getAsociados());
+            //esto es lo q hay q mostrat x pantalla
+            JOptionPane.showMessageDialog(null, "Asociado agregado exitosamente");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al agregar: " + ex.getMessage());
+        }
+    }
+
 
     public DTOAsociado toDTO(Asociado asociado) {
         return modelo.toDTO(asociado);

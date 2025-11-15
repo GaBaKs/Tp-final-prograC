@@ -30,6 +30,6 @@ public class MiObserverVista implements Observer
         }
         else
             throw new IllegalArgumentException();
-        
+
     }
 }

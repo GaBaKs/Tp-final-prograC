@@ -1,4 +1,4 @@
-package testventanas;
+package segundaEntrega.vista;
 
 import segundaEntrega.vista.IVistaInicio;
 
@@ -25,21 +25,7 @@ public class JframeInicio extends JFrame implements IVistaInicio {
     private JButton btnSim;
     private JLabel lblNewLabel;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    JframeInicio frame = new JframeInicio();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
 
     /**
      * Create the frame.

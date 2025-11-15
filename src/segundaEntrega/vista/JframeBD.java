@@ -57,6 +57,8 @@ public class JframeBD extends JFrame implements IVistaBD
     private JPanel borrarDB;
     private JButton btnBorrarDB;
     private DefaultListModel<Asociado> modeloLista;
+    private JPanel datoPrueba;
+    private JButton btnAgregaDatosPrueba;
 
 
 
@@ -199,6 +201,13 @@ public class JframeBD extends JFrame implements IVistaBD
         this.btnBajaAsociados.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
         this.btnBajaAsociados.setForeground(Color.BLACK);
 
+        this.datoPrueba = new JPanel();
+        this.panelAB.add(this.datoPrueba);
+
+        this.btnAgregaDatosPrueba = new JButton("Agrega datos de prueba");
+        this.btnAgregaDatosPrueba.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+        this.datoPrueba.add(this.btnAgregaDatosPrueba);
+
         this.borrarDB = new JPanel();
         this.panelAB.add(this.borrarDB);
 
@@ -224,6 +233,7 @@ public class JframeBD extends JFrame implements IVistaBD
     public void addActionListener(ActionListener l) {
         this.btnAltaAsociados.addActionListener(l);
         this.btnBajaAsociados.addActionListener(l);
+        this.btnAgregaDatosPrueba.addActionListener(l);
         this.btnBorrarDB.addActionListener(l);
     }
     @Override

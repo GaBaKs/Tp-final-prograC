@@ -12,6 +12,15 @@ import clinica.modelo.personas.pacientes.*;
 import clinica.modelo.personas.medicos.*;
 import clinica.patrones.decorator.*;
 import clinica.patrones.facade.*;
+import segundaEntrega.controlador.ControladorBD;
+import segundaEntrega.controlador.ControladorInicio;
+import segundaEntrega.modelo.ModeloBD;
+import segundaEntrega.modelo.ModeloSimulacion;
+import segundaEntrega.modelo.negocio.Ambulancia;
+import segundaEntrega.persistencia.basededatos.ConexionBD;
+import segundaEntrega.vista.JframeBD;
+import segundaEntrega.vista.JframeInicio;
+import segundaEntrega.vista.JframeSimulacion;
 
 import java.time.LocalDate;
 
@@ -70,7 +79,28 @@ public class Prueba {
         System.out.println(factura2.muestraFactura());
         System.out.println(sistema.generaReporteMedico(medico1, LocalDate.of(1999,10,10),LocalDate.of(2026,10,12)));
         System.out.println(sistema.generaReporteMedico(medico2, LocalDate.of(1999,10,10),LocalDate.of(2026,10,12)));
-        
+
+        //parte 2
+        Ambulancia ambulancia=Ambulancia.getInstance();
+
+        //creacion de MVC inicio
+        JframeInicio ventanaInicio=new JframeInicio();
+        ventanaInicio.setVisible(true);
+
+        ModeloSimulacion modeloSimulacion=new ModeloSimulacion();
+
+        ControladorInicio controladorInicio=new ControladorInicio(modeloSimulacion,ventanaInicio,ambulancia);
+
+        //creo el singleton
+        ConexionBD conexionBD=ConexionBD.getInstance();
+
+
+
+
+
+
+
+
 	}
 
 }

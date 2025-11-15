@@ -9,6 +9,15 @@ import segundaEntrega.persistencia.DAOAsociadoYDTO.IDAOAsociado;
 
 import java.util.ArrayList;
 
+/**
+ * Representa el Modelo de Negocio que centraliza la lógica de gestión de Asociados
+ * y la persistencia de datos.
+ * <p>
+ * Esta clase actúa como el único punto de contacto entre los Controladores, el DTO y el DAO,
+ * manteniendo una lista de trabajo en memoria {@code listaAsociadosMemoria} sincronizada
+ * con la Base de Datos para operaciones de validación rápidas.
+ */
+
     public class ModeloBD
     {
         private IDAOAsociado dao;
@@ -30,6 +39,14 @@ import java.util.ArrayList;
 
         // --- Lógica de Negocio (habla con DAO) ---
 
+        /**
+         * Agrega un nuevo asociado al sistema, persistiendo el cambio en la Base de Datos
+         * y actualizando la lista en memoria.
+         * <p>
+         * Este metodo incluye validación de DNI y chequeo de duplicados en memoria
+         * antes de intentar la persistencia.
+         * </p>
+         */
         public void agregarAsociado(DTOAsociado dto) throws Exception {
             // Lógica de negocio (Validaciones)
             String dni = dto.getDni();
