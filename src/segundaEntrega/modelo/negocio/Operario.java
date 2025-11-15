@@ -9,7 +9,7 @@ import clinica.modelo.personas.Persona;
  */
 public class Operario extends Persona implements Runnable{
     protected Ambulancia ambulancia;
-    static boolean simulacionactiva;
+    protected boolean simulacionactiva;
 
     public Operario(String dni, String n_A, String domicilio, String ciudad, String telefono) {
         super(dni, n_A, domicilio, ciudad, telefono);
@@ -32,7 +32,6 @@ public class Operario extends Persona implements Runnable{
      */
     @Override
     public void run() {
-        int i=0;
         while(simulacionactiva){
             try {
                 // El operario solo solicita mantenimiento
@@ -40,7 +39,10 @@ public class Operario extends Persona implements Runnable{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            i++;
+            simulacionactiva=false;
         }
+    }
+    public void setSimulacionActiva(boolean simulacionactiva) {
+        this.simulacionactiva = simulacionactiva;
     }
 }

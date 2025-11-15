@@ -11,7 +11,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+/**
+ * Ventana principal del módulo de Base de Datos dentro del sistema de gestión
+ * de la clínica. Esta interfaz gráfica permite realizar operaciones CRUD
+ * relacionadas con los asociados registrados.
+ */
 public class JframeBD extends JFrame implements IVistaBD
 {
 
@@ -229,6 +233,10 @@ public class JframeBD extends JFrame implements IVistaBD
         this.panelListado.add(new JScrollPane(list));
 
     }
+
+    /**Registra el ActionListener provisto sobre todos los botones de la vista.
+     * @param l Listener que gestionará los eventos provenientes de la vista.
+     */
     @Override
     public void addActionListener(ActionListener l) {
         this.btnAltaAsociados.addActionListener(l);
@@ -236,10 +244,14 @@ public class JframeBD extends JFrame implements IVistaBD
         this.btnAgregaDatosPrueba.addActionListener(l);
         this.btnBorrarDB.addActionListener(l);
     }
+
+    /** Hace visible la ventana del módulo de Base de Datos. */
     @Override
     public void arranca(){
         this.setVisible(true);
     }
+
+    /** Cierra y libera los recursos de la ventana. */
     @Override
     public void cerrar()
     {
@@ -247,32 +259,32 @@ public class JframeBD extends JFrame implements IVistaBD
     }
     @Override
     public JTextField getNombre(){
-        return this.textFieldCalle;
+        return this.textFieldNombre;
     }
     @Override
     public JTextField getApellido()
     {
-        return this.textFieldCalle;
+        return this.textFieldApellido;
     }
     @Override
     public JTextField getCiudad()
     {
-        return this.textFieldCalle;
+        return this.textFieldCiudad;
     }
     @Override
     public JTextField getDNI()
     {
-        return this.textFieldCalle;
+        return this.textFieldDNI;
     }
     @Override
     public JTextField getTelefono()
     {
-        return this.textFieldCalle;
+        return this.textFieldTelefono;
     }
     @Override
     public JTextField getNumero()
     {
-        return this.textFieldCalle;
+        return this.textFieldNumero;
     }
     @Override
     public JTextField getCalle()
@@ -280,6 +292,7 @@ public class JframeBD extends JFrame implements IVistaBD
         return this.textFieldCalle;
     }
 
+    /** Cierra y libera los recursos de la ventana. */
     public Asociado getAsociadoSeleccionado() { return (Asociado)this.list.getSelectedValue(); }
 
     public JButton getbtnAltaAsociados(){return this.btnAltaAsociados;}
@@ -290,6 +303,13 @@ public class JframeBD extends JFrame implements IVistaBD
 
     public JPanel getJPanel(){ return this.panelPrincipal;}
 
+
+    /**
+     * Actualiza la lista visible de asociados en el JList utilizando
+     * un DefaultListModel. Reemplaza el contenido anterior.
+     *
+     * @param listaAsociados Lista de asociados a mostrar.
+     */
     @Override
     public void actualizaLista(ArrayList<Asociado> listaAsociados) {
         this.modeloLista.clear();
@@ -297,5 +317,36 @@ public class JframeBD extends JFrame implements IVistaBD
             this.modeloLista.addElement(a);
         }
         this.repaint();
+    }
+
+    /**
+     * Muestra un diálogo de confirmación con opciones Sí / No.
+     *
+     * @param titulo   Título del cuadro de diálogo.
+     * @param mensaje  Mensaje informativo.
+     * @return true si el usuario confirma, false si cancela.
+     */
+    @Override
+    public boolean mostrarConfirmacion(String titulo, String mensaje) {
+        int opcion = JOptionPane.showConfirmDialog(
+                this, // 'this' es el JFrame, es mejor que 'null'
+                mensaje,
+                titulo,
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+        return opcion == JOptionPane.YES_OPTION;
+    }
+
+    /**  Muestra un cuadro de error con estilo de advertencia. */
+    @Override
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /** Muestra un cuadro de información general. */
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 }

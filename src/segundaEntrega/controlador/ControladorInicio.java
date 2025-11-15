@@ -13,31 +13,38 @@ public class ControladorInicio implements ActionListener {
     private ModeloSimulacion inicioSimulacion;
     private IVistaInicio vista;
     private Ambulancia ambulancia;
+    private ModeloBD modeloBD;
+    private ModeloSimulacion modeloSimulacion;
 
 
 
-    public ControladorInicio(ModeloSimulacion inicioSimulacion, IVistaInicio vista,Ambulancia ambulancia)
+    public ControladorInicio(ModeloSimulacion inicioSimulacion, IVistaInicio vista)
     {
-        this.ambulancia=ambulancia;
         this.inicioSimulacion = inicioSimulacion;
         this.vista = vista;
         this.vista.addActionListener(this);
+        this.ambulancia = Ambulancia.getInstance(); // Usamos el Singleton
+        this.modeloBD = new ModeloBD(this.ambulancia);
+        this.modeloSimulacion = new ModeloSimulacion(this.ambulancia); // Este modelo usará la ambulancia
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-        ModeloBD modelobd = new ModeloBD(this.ambulancia);
 
         if (comando.equals("Modulo de simulacion")) {
             // oculto la vista de inicio
             this.vista.cerrar();
 
             IVistaSimulacion vistasimulacion = new JframeSimulacion();
-            ModeloSimulacion modeloInicioSimulacion = new ModeloSimulacion(); //el controlador deberia conocer esto no?
-            // creo el controlador de principal y le paso vista y modelo
-            ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, modeloInicioSimulacion,modelobd.getAsociados());
+
+            // Pasamos el modelo de simulación y la lista de asociados del modeloBD
+            ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, this.modeloSimulacion,this.modeloBD.getAsociados());
+
+
+            MiObserverVista miObserverVista = new MiObserverVista(vistasimulacion, this.ambulancia);
+
 
             // muestro la vista de la simulacion
             vistasimulacion.arranca();
@@ -46,13 +53,11 @@ public class ControladorInicio implements ActionListener {
             // oculto la vista de inicio
             this.vista.cerrar();
 
-            //creo la vista para la base de datos
             IVistaBD vistaBD = new JframeBD();
-            //creo el controlador y le paso al vista y el modelo
-            ControladorBD controladorbd = new ControladorBD(vistaBD,modelobd);
+            // Le pasamos el modelo de base de datos
+            ControladorBD controladorbd = new ControladorBD(vistaBD, this.modeloBD);
             //muestro la vista de la base de datos
             vistaBD.arranca();
-
         }
     }
 

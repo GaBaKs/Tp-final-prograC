@@ -17,7 +17,6 @@ import java.util.ArrayList;
  * manteniendo una lista de trabajo en memoria {@code listaAsociadosMemoria} sincronizada
  * con la Base de Datos para operaciones de validación rápidas.
  */
-
     public class ModeloBD
     {
         private IDAOAsociado dao;
@@ -48,47 +47,53 @@ import java.util.ArrayList;
          * </p>
          */
         public void agregarAsociado(DTOAsociado dto) throws Exception {
-            // Lógica de negocio (Validaciones)
             String dni = dto.getDni();
             if (dni == null || dni.trim().isEmpty()) {
                 throw new Exception("El DNI no puede ser nulo o vacío");
             }
-
-            // --- INICIO DE LA MODIFICACIÓN ---
-
-            // 1. Creamos un objeto temporal para la comprobación
-            // (Esto depende de que fromDTO() esté disponible en esta clase)
+            // Objeto temporal para la comprobación
             Asociado temporal = fromDTO(dto);
 
-            // 2. Comprobar duplicados en la lista de memoria
-            // (Esto requiere que tengas .equals() implementado en Persona/Asociado)
+            // Comprobar duplicados en la lista de memoria
+            // (Para esto tenemos equals implementado en persona)
             if (listaAsociadosMemoria.contains(temporal)) {
-                // Usamos la excepción específica de tu proyecto
                 throw new DuplicadoException("Ya existe un asociado con el DNI: " + dni);
             }
-
-            // --- FIN DE LA MODIFICACIÓN ---
-
-            // 3. Persistir en BD (si no hubo excepción)
+            // Persistir en BD (si no hubo excepción)
             dao.altaAsociado(dto);
 
-            // 4. Actualizar lista en memoria
+            // Actualizar lista en memoria
             listaAsociadosMemoria.add(temporal);
         }
 
+        /**
+         * Elimina un asociado del sistema, borrándolo de la Base de Datos y
+         * actualizando la lista en memoria de forma atómica.
+         * @param dto El objeto {@code DTOAsociado} con la clave del asociado a eliminar.
+         * @throws Exception Si ocurre un error al eliminar en el DAO.
+         */
         public void eliminarAsociado(DTOAsociado dto) throws Exception {
-            // 1. Eliminar de BD
+            // Eliminar de BD
             dao.bajaAsociado(dto);
 
-            // 2. Actualizar lista en memoria (requiere .equals() en Asociado)
+            // Actualizar lista en memoria
             listaAsociadosMemoria.remove(fromDTO(dto));
         }
 
+        /**
+         * Inicializa o vacía las tablas de la Base de Datos y limpia la lista en memoria.
+         * @throws Exception Si ocurre un error al inicializar la base de datos.
+         */
         public void inicializarTablas() throws Exception {
             dao.inicializarDB();
             listaAsociadosMemoria.clear();
         }
 
+        /**
+         * Carga todos los asociados desde la Base de Datos, mapea sus datos
+         * y reemplaza el contenido de la lista en memoria.
+         * @throws Exception Si el DAO falla al obtener la lista de asociados.
+         */
         public void cargarDatosDesdeBD() throws Exception {
             listaAsociadosMemoria.clear();
             ArrayList<DTOAsociado> dtos = dao.getListaAsociados();
@@ -102,7 +107,11 @@ import java.util.ArrayList;
         }
 
         // --- Métodos de Mapeo (DTO <-> Modelo de Negocio) ---
-        // pasa de dto a objeto asociado
+        /**
+         * Mapea un objeto de transferencia de datos (DTO) a un objeto del modelo de negocio (Asociado).
+         * @param dto El {@code DTOAsociado} de origen.
+         * @return El objeto {@code Asociado} creado.
+         */
         public Asociado fromDTO(DTOAsociado dto) {
             return new Asociado(
                     dto.getDni(),
@@ -115,7 +124,11 @@ import java.util.ArrayList;
             );
         }
 
-        // al reves
+        /**
+         * Mapea un objeto del modelo de negocio (Asociado) a un objeto de transferencia de datos (DTO).
+         * @param asociado El objeto {@code Asociado} de origen.
+         * @return El {@code DTOAsociado} creado.
+         */
         public DTOAsociado toDTO(Asociado asociado) {
             return new DTOAsociado(
                     asociado.getDni(),

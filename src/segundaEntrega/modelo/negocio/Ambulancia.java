@@ -19,6 +19,7 @@ import java.util.Observable;
 public class Ambulancia extends Observable {
     protected IState ambulanciaState; //PatronState, el estado actual
     private String estadoString; //dto simple para notificar a la vista
+
     private static Ambulancia instance;
 
     // Atributos de control del Monitor

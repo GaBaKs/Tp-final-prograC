@@ -29,8 +29,11 @@ public class ControladorSimulacion implements ActionListener {
             // Le dice al modelo que comience la simulación (inicie los hilos)
             JTextField cantsolicitudes = vista.getCantSolicitudes();
             int cantsolicitudesInicial = Integer.parseInt(cantsolicitudes.getText());
+            JTextField cantAsociados = vista.getCantAsociados();
+            int cantAsociadosTotal = Integer.parseInt(cantAsociados.getText());
+
             //cambio a int
-            this.inicioSimulacion.inicia(cantsolicitudesInicial,asociados);//de alguna manera le tengo q mandar un arraylist de asociados
+            this.inicioSimulacion.inicia(cantsolicitudesInicial,cantAsociadosTotal,asociados);//de alguna manera le tengo q mandar un arraylist de asociados
 
         } else if (comando.equals("Finalizar")) {
             this.inicioSimulacion.finalizar();

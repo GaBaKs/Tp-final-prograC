@@ -5,6 +5,14 @@ import segundaEntrega.persistencia.basededatos.ConexionBD;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+/**
+ * Implementación concreta del Data Access Object (DAO) para la entidad Asociado.
+ * <p>
+ * Esta clase implementa la interfaz {@link IDAOAsociado} y centraliza todas las
+ * operaciones de persistencia para los asociados.
+ * </p>
+ */
 public class DAOAsociado implements IDAOAsociado
 {
     @Override
@@ -66,6 +74,13 @@ public class DAOAsociado implements IDAOAsociado
         }
         return lista;
     }
+
+    /**
+     * Elimina un asociado de la base de datos utilizando su DNI como clave.
+     *
+     * @param dto El DTO {@link DTOAsociado} que contiene el DNI del asociado a eliminar.
+     * @throws Exception Si ocurre un error de SQL.
+     */
     @Override
     public void bajaAsociado(DTOAsociado dto) throws Exception
     {
@@ -85,6 +100,12 @@ public class DAOAsociado implements IDAOAsociado
         }
     }
 
+    /**
+     * Inserta un nuevo asociado en la base de datos.
+     *
+     * @param dto El DTO {@link DTOAsociado} con todos los datos del nuevo asociado.
+     * @throws Exception Si ocurre un error de SQL.
+     */
     @Override
     public void altaAsociado(DTOAsociado dto) throws Exception {
         String sql = "INSERT INTO asociados (dni, nombre, domicilio, ciudad, telefono, numSolicitudes) VALUES (?, ?, ?, ?, ?, ?)";
@@ -111,10 +132,52 @@ public class DAOAsociado implements IDAOAsociado
         }
     }
 
+    /**
+     * Reinicia la tabla de asociados en la base de datos.
+     * </p>
+     * @throws Exception Si ocurre un error de SQL.
+     */
     @Override
     public void inicializarDB() throws Exception {
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS asociados (...)";
+        String dropSql = "DROP TABLE IF EXISTS asociados";
+
+        String createSql = "CREATE TABLE asociados (" +
+                "dni VARCHAR(20) PRIMARY KEY, " +
+                "nombre VARCHAR(100) NOT NULL, " +
+                "domicilio VARCHAR(100), " +
+                "ciudad VARCHAR(100), " +
+                "telefono VARCHAR(50), " +
+                "numSolicitudes INT NOT NULL" +
+                ")";
+
+        Connection con = null;
+        Statement st = null;
+
+        try {
+            con = ConexionBD.getInstance().getConnection();
+            st = con.createStatement();
+
+            // Eliminar la tabla (como pide el enunciado)
+            st.execute(dropSql);
+
+            // Crear la tabla nueva
+            st.execute(createSql);
+
+        } catch (SQLException e) {
+            throw new Exception("Error al inicializar la base de datos: " + e.getMessage());
+        } finally {
+            if (st != null) st.close();
+            // No cerramos la conexión, la gestiona el Singleton
+        }
     }
+
+    /**
+     * Reemplaza todos los datos de la tabla 'asociados' con los datos de la lista proporcionada.
+     * </p>
+     *
+     * @param lista La lista de {@link DTOAsociado} que representa el estado final de la tabla.
+     * @throws Exception Si ocurre un error de SQL.
+     */
     @Override
     public void guardarTodo(ArrayList<DTOAsociado> lista) throws Exception {
         Connection con = null;

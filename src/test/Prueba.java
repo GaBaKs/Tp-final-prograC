@@ -87,9 +87,9 @@ public class Prueba {
         JframeInicio ventanaInicio=new JframeInicio();
         ventanaInicio.setVisible(true);
 
-        ModeloSimulacion modeloSimulacion=new ModeloSimulacion();
+        ModeloSimulacion modeloSimulacion=new ModeloSimulacion(ambulancia);
 
-        ControladorInicio controladorInicio=new ControladorInicio(modeloSimulacion,ventanaInicio,ambulancia);
+        ControladorInicio controladorInicio=new ControladorInicio(modeloSimulacion,ventanaInicio);
 
         //creo el singleton
         ConexionBD conexionBD=ConexionBD.getInstance();

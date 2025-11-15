@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Asociado extends Persona implements Runnable {
     protected int numsolicitudes;
     protected Ambulancia ambulancia;// El monitor (recurso compartido) que necesita
-    static boolean simulacionactiva; // Flag para detener el hilo de forma segura
+    protected boolean simulacionactiva; // Flag para detener el hilo de forma segura
     Random random = new Random();
     int numero;
 
@@ -66,4 +66,7 @@ public class Asociado extends Persona implements Runnable {
         return this.getN_A() + " (" + this.getDni() + ")";
     }
 
+    public void setSimulacionActiva(boolean simulacionactiva) {
+        this.simulacionactiva = simulacionactiva;
+    }
 }

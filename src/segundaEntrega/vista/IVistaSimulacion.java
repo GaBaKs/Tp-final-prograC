@@ -12,7 +12,5 @@ public interface IVistaSimulacion {
     public void setEstadoAmbulancia(String estado);
     public void appendMovimientosAsociados(String mensaje);
     public JTextField getNombreyApellido();
-    //get selected person ?? ni idea
-    //actualizar lista
-
+    public JTextField getCantAsociados();
 }

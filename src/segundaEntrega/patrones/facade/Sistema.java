@@ -10,6 +10,15 @@ import segundaEntrega.persistencia.DAOAsociadoYDTO.IDAOAsociado;
 
 import java.util.ArrayList;
 
+/**
+ * La clase Sistema actúa como el núcleo lógico de la aplicación.
+ *
+ * Centraliza:
+ * - La carga y persistencia de datos de asociados (a través del DAO).
+ * - El acceso a la instancia única de Ambulancia (patrón Singleton).
+ * - La comunicación con los controladores principales de la aplicación.
+ * - El manejo de las colecciones internas de asociados.
+ */
 public class Sistema {
     private ArrayList<Asociado> asociadosSistema; //aca estan los asociados q pide el usuario
     private IDAOAsociado asociadoDAO;
@@ -20,7 +29,12 @@ public class Sistema {
 
 
 
-
+    /**
+     * Constructor principal del sistema.
+     * @param controladorBD controlador del módulo base de datos
+     * @param controladorInicio controlador de la pantalla de inicio
+     * @param controladorSimulacion controlador del módulo de simulación
+     */
     public Sistema(ControladorBD controladorBD, ControladorInicio controladorInicio, ControladorSimulacion controladorSimulacion) {
         this.asociadosSistema = new ArrayList<>();
         this.asociadoDAO = new DAOAsociado();
@@ -37,6 +51,16 @@ public class Sistema {
     }
 
 
+    /**
+     * Carga todos los asociados almacenados en la base de datos.
+     *
+     * Se realiza el siguiente proceso:
+     * - Se limpia la lista interna en memoria.
+     * - Se obtienen los DTO desde el DAO.
+     * - Se transforman los DTO en objetos Asociado mediante el ControladorBD.
+     *
+     * @throws Exception si ocurre un error durante la lectura o conversión de datos.
+     */
     public void cargarAsociadosDesdeBD() throws Exception {
         this.asociadosSistema.clear();
         ArrayList<DTOAsociado> dtos = asociadoDAO.getListaAsociados();
@@ -46,6 +70,13 @@ public class Sistema {
         }
     }
 
+    /**
+     * Guarda todos los datos de los asociados cuando el sistema se cierra.
+     *
+     * Convierte los asociados de memoria a DTOs y los persiste mediante el DAO.
+     *
+     * @throws Exception si se produce un error al guardar en la base de datos.
+     */
     public void guardarDatosAlCerrar() throws Exception {
         ArrayList<DTOAsociado> dtos = new ArrayList<>();
         for (Asociado asoc : this.asociadosSistema) {
@@ -55,7 +86,12 @@ public class Sistema {
     }
 
     // --- MÉTODOS DE GESTIÓN (ABM) PARA EL CONTROLADOR ---
-
+    /**
+     * Agrega un nuevo asociado al sistema.
+     *
+     * @param nuevoAsociado el asociado a agregar
+     * @throws Exception si el asociado ya existe en la lista
+     */
     public void agregarAsociado(Asociado nuevoAsociado) throws Exception {
         if (asociadosSistema.contains(nuevoAsociado)) { // Debes implementar equals en Asociado por DNI
             throw new Exception("El asociado ya existe");
@@ -68,6 +104,12 @@ public class Sistema {
         asociadoDAO.altaAsociado(controladorBD.toDTO(nuevoAsociado));
     }
 
+    /**
+     * Elimina un asociado tanto de la memoria como de la base de datos.
+     *
+     * @param asociado el asociado a eliminar
+     * @throws Exception si el asociado no existe en el sistema
+     */
     public void eliminarAsociado(Asociado asociado) throws Exception {
         // elimino d memoria
         if (asociadosSistema.remove(asociado)) {
@@ -79,10 +121,20 @@ public class Sistema {
         }
     }
 
+    /**
+     * Obtiene la lista completa de asociados cargados en memoria.
+     *
+     * @return lista de asociados
+     */
     public ArrayList<Asociado> getAsociadosSistema() {
         return asociadosSistema;
     }
 
+    /**
+     * Devuelve la instancia única de la ambulancia del sistema.
+     *
+     * @return instancia de Ambulancia
+     */
     public Ambulancia getAmbulancia() {
         return ambulancia;
     }

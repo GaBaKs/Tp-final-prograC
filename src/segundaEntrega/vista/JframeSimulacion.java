@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/** Vista principal de la simulación del sistema de ambulancias. */
 public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyListener {
 
     private static final long serialVersionUID = 1L;
@@ -39,16 +39,6 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
     private JPanel panel_2;
     private JLabel lblCantSol;
     private JTextField cantSol;
-
-    @Override
-    public JPanel getContentPane() {
-        return contentPane;
-    }
-
-    public void setContentPane(JPanel contentPane) {
-        this.contentPane = contentPane;
-    }
-
     private JPanel panel_3;
     private JLabel lblEstadoAmbulancia;
     private JTextArea textAreaEstadoAmbulancia;
@@ -193,8 +183,10 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
         this.contentPane.add(this.movimientosAsociado);
         this.movimientosAsociado.setBorder(new TitledBorder(null, "Notificaciones del Asociado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
+        this.movimientosAsociado.setLayout(new GridLayout(1,1,0,0));
         this.scrollPane_1 = new JScrollPane();
         this.movimientosAsociado.add(this.scrollPane_1);
+
 
         this.txtAsociado = new JTextArea();
         this.txtAsociado.setEditable(false);
@@ -203,47 +195,60 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
 
     }
 
-
+    /** Obtiene el campo de texto donde el usuario ingresa la cantidad de solicitudes. */
     public JTextField getCantSolicitudes(){
         return this.cantSol;
     }
 
-    // para que el controlador actualice la vista(no se si esto deberia estar aca la verdad)
+
+    /** Actualiza la visualización del estado actual de la ambulancia. */
     public void setEstadoAmbulancia(String estado)
     {
         this.textAreaEstadoAmbulancia.setText(estado);
         assert estado!=null:"no puede tener un string nulo";
     }
 
+    /** Agrega una notificación o movimiento generado por la ambulancia */
     public void addAccionAmbulancia(String accion) {
         this.txtAsociado.append(accion + "\n");
     }
 
     // para manejar la ventana
+    /**Hace visible la ventana de simulación.*/
     public void arranca() {
         this.setVisible(true);
     }
 
+    /** Cierra y libera los recursos asociados a la ventana.*/
     public void cerrar() {
         this.dispose();
     }
 
+    /**  Agrega un mensaje al listado de movimientos generados por los asociados. */
     public void appendMovimientosAsociados(String mensaje)
     {
         this.txtAsociado.append(mensaje+"\n");
     }
 
+    /** Devuelve el campo donde se ingresa el nombre y apellido del operario. */
     public JTextField getNombreyApellido() {
         return this.textFieldN_M;
     }
 
+    public JTextField getCantAsociados(){
+        return this.cantAso;
+    }
+
+
     //para conectar al controlador
+    /** Registra un ActionListener para los botones principales de la vista. */
     @Override
     public void addActionListener(ActionListener l) {
         this.btnIniciar.addActionListener(l);
         this.btnFinalizar.addActionListener(l);
     }
 
+    /** Evento de teclado ejecutado al soltar una tecla. */
     public void keyPressed(KeyEvent e)
     {
     }
@@ -265,6 +270,13 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
     {
     }
 
+    @Override
+    public JPanel getContentPane() {
+        return contentPane;
+    }
 
-    //agregar boton de solicitar mantenimiento
+    public void setContentPane(JPanel contentPane) {
+        this.contentPane = contentPane;
+    }
+
 }

@@ -2,6 +2,10 @@ package segundaEntrega.persistencia.DAOAsociadoYDTO;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase implementa {@link Serializable} y representa un Objeto de Transferencia de Datos (DTO) para la entidad Asociado.
+ * </p>
+ */
 public class DTOAsociado implements Serializable
 {
     private String dni;

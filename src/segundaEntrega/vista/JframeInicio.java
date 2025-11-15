@@ -13,7 +13,10 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
-
+/** Esta ventana representa el punto de entrada del usuario, permitiéndole
+ * seleccionar a qué módulo desea acceder: el módulo de Base de Datos o el
+ * módulo de Simulación.
+ */
 public class JframeInicio extends JFrame implements IVistaInicio {
 
     private static final long serialVersionUID = 1L;
@@ -71,10 +74,13 @@ public class JframeInicio extends JFrame implements IVistaInicio {
         this.btnSim.addActionListener(l);
     }
 
+    /** Hace visible la ventana inicial del sistema.*/
     @Override
     public void arranca() {
         this.setVisible(true);
     }
+
+    /** Cierra la ventana liberando los recursos asociados. */
     @Override
     public void cerrar() {
         this.dispose();

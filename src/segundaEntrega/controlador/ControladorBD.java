@@ -34,8 +34,7 @@ public class ControladorBD implements ActionListener {
         } else if (comando.equalsIgnoreCase("Agrega datos de prueba")){
             this.agregaDatosPrueba();
         } else if (comando.equalsIgnoreCase("Borrar DB")) {
-
-
+            this.inicializarBaseDeDatos();
         }
     }
 
@@ -94,6 +93,31 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    public void inicializarBaseDeDatos() {
+        try {
+            // Pedir confirmación
+            int opcion = JOptionPane.showConfirmDialog(
+                    null, // Debería ser la vista (JFrame)
+                    "¿Está seguro que desea borrar TODOS los asociados?\nEsta acción es irreversible.",
+                    "Confirmar Inicialización",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                // Llamar al Modelo (que llamará al DAO)
+                modelo.inicializarTablas();
+
+                // Actualizar la vista (la lista ahora está vacía)
+                vista.actualizaLista(modelo.getAsociados());
+                JOptionPane.showMessageDialog(null, "Base de datos inicializada correctamente.");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al inicializar la BD: " + e.getMessage());
+        }
+    }
+
     public void agregaDatosPrueba(){
         try {
             Asociado asociado1= new Asociado("12345623","Pipo","Florisbelo 2738","Mar Del Plata","2235379123",4,modelo.getAmbulanciaCompartida());
@@ -117,6 +141,25 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    public void inicializarBD() {
+        try {
+            // Pide confirmación a la Vista
+            boolean confirmado = vista.mostrarConfirmacion(
+                    "Confirmar Inicialización",
+                    "¿Está seguro que desea borrar TODOS los asociados?\nEsta acción es irreversible."
+            );
+
+            if (confirmado) {
+                // 2. Llamar al Modelo
+                modelo.inicializarTablas();
+                vista.actualizaLista(modelo.getAsociados());
+                vista.mostrarMensaje("Base de datos inicializada correctamente.");
+            }
+
+        } catch (Exception e) {
+            vista.mostrarError("Error al inicializar la BD: " + e.getMessage());
+        }
+    }
 
     public DTOAsociado toDTO(Asociado asociado) {
         return modelo.toDTO(asociado);

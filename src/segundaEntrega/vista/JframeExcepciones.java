@@ -9,6 +9,10 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
 
+/**
+ * Ventana utilizada para la visualización de mensajes de error dentro del
+ * sistema de gestión de la clínica.
+ */
 public class JframeExcepciones extends JFrame {
 
     private static final long serialVersionUID = 1L;
