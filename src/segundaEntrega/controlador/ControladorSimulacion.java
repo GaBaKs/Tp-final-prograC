@@ -2,6 +2,7 @@ package segundaEntrega.controlador;
 
 import segundaEntrega.modelo.InicioSimulacion;
 import segundaEntrega.vista.IVistaSimulacion;
+import segundaEntrega.vista.JframeExcepciones;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,20 +10,18 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ControladorSimulacion implements ActionListener, Observer {
+public class ControladorSimulacion implements ActionListener {
     private InicioSimulacion inicioSimulacion;
     private IVistaSimulacion vista;
 
-    public ControladorSimulacion(IVistaSimulacion vista, InicioSimulacion inicioSimulacion)
-    {
+    public ControladorSimulacion(IVistaSimulacion vista, InicioSimulacion inicioSimulacion) {
         this.inicioSimulacion = inicioSimulacion;
         this.vista = vista;
         this.vista.addActionListener(this);
-        this.inicioSimulacion.getAmbulancia().addObserver(this);
     }
+
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
         if (comando.equals("Iniciar")) {
@@ -34,14 +33,15 @@ public class ControladorSimulacion implements ActionListener, Observer {
 
         } else if (comando.equals("Finalizar")) {
             this.inicioSimulacion.finalizar();
-        }
-        else if (comando.equals("Solicitar mantenimiento")) {
+        } else if (comando.equals("Solicitar mantenimiento")) {
             this.inicioSimulacion.solicitudMantenimiento();
         }
     }
 
-    @Override
-    public void update(Observable o, Object nuevoestado) {
-        vista.setEstadoAmbulancia("Estado: " + nuevoestado.toString()); //esto creo q esta mal pero no se como hacerlo bien
+    public int getCantSolicitudes() {
+            int valor = Integer.parseInt(vista.getCantSolicitudes().getText());
+            return valor;
+
     }
+
 }

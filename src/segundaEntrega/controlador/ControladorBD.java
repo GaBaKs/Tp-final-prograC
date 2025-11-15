@@ -1,7 +1,9 @@
 package segundaEntrega.controlador;
 
+import segundaEntrega.modelo.ModeloBD;
 import segundaEntrega.modelo.negocio.Asociado;
 import segundaEntrega.patrones.facade.Sistema;
+import segundaEntrega.persistencia.DAOAsociadoYDTO.DTOAsociado;
 import segundaEntrega.vista.IVistaBD;
 
 import javax.swing.*;
@@ -11,14 +13,14 @@ import java.awt.event.ActionListener;
 
 public class ControladorBD implements ActionListener {
     private IVistaBD vista;
-    private Sistema modelo;
+    private ModeloBD modelo;
 
-    public ControladorBD(IVistaBD ventana, Sistema modelo)
+    public ControladorBD(IVistaBD ventana, ModeloBD modelo)
     {
         this.vista=ventana;
         this.modelo=modelo;
         this.vista.addActionListener(this);
-        this.vista.actualizaLista(this.modelo.getAsociadosSistema());
+        this.vista.actualizaLista(this.modelo.getAsociados());
     }
 
     public void actionPerformed (ActionEvent e)
@@ -52,14 +54,14 @@ public class ControladorBD implements ActionListener {
                     vista.getCiudad().getText(),
                     vista.getTelefono().getText(),
                     1, // Solicitudes por defecto (o agregar campo en la vista)
-                    modelo.getAmbulancia() // Obtenemos la ambulancia del Sistema
+                    modelo.getAmbulanciaCompartida() // Obtenemos la ambulancia del Sistema
             );
 
             // Delegar al Modelo (que guardará en memoria y BD)
-            modelo.agregarAsociado(nuevoAsociado);
+            modelo.agregarAsociado(toDTO(nuevoAsociado));
 
             // 4. Actualizar la vista y limpiar
-            vista.actualizaLista(modelo.getAsociadosSistema());
+            vista.actualizaLista(modelo.getAsociados());
             //esto es lo q hay q mostrat x pantalla
             JOptionPane.showMessageDialog(null, "Asociado agregado exitosamente");
 
@@ -77,16 +79,23 @@ public class ControladorBD implements ActionListener {
         } else {
             try {
                 // Delegar al Modelo
-                modelo.eliminarAsociado(seleccionado);
+                modelo.eliminarAsociado(toDTO(seleccionado));
 
                 // Actualizar Vista
-                vista.actualizaLista(modelo.getAsociadosSistema());
+                vista.actualizaLista(modelo.getAsociados());
                 JOptionPane.showMessageDialog(null, "Asociado eliminado");
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar: " + ex.getMessage());
             }
         }
+    }
+
+    public DTOAsociado toDTO(Asociado asociado) {
+        return modelo.toDTO(asociado);
+    }
+    public Asociado fromDTO(DTOAsociado dto) {
+        return modelo.fromDTO(dto);
     }
 
 }

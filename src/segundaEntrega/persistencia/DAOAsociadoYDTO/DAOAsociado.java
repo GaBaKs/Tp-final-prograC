@@ -32,6 +32,7 @@ public class DAOAsociado implements IDAOAsociado
 
     }
 
+
     @Override
     public ArrayList<DTOAsociado> getListaAsociados() throws Exception {
         ArrayList<DTOAsociado> lista = new ArrayList<>();

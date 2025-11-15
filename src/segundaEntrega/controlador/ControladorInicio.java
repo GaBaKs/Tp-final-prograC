@@ -1,9 +1,8 @@
 package segundaEntrega.controlador;
 
 import segundaEntrega.modelo.InicioSimulacion;
-import segundaEntrega.vista.IVistaInicio;
-import segundaEntrega.vista.IVistaSimulacion;
-import segundaEntrega.vista.JframeSimulacion;
+import segundaEntrega.modelo.ModeloBD;
+import segundaEntrega.vista.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,11 +36,19 @@ public class ControladorInicio implements ActionListener {
             // creo el controlador de principal y le paso vista y modelo
             ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, modeloInicioSimulacion);
 
-            // muestro la vista de la somulacion
+            // muestro la vista de la simulacion
             vistasimulacion.arranca();
 
         } else if (comando.equals("Modulo base de datos")) {
-            //idem pero p crear la vista de asociados
+            // oculto la vista de inicio
+            this.vista.cerrar();
+
+            //creo la vista para la base de datos
+            ModeloBD modelobd = new ModeloBD(this.inicioSimulacion.getAmbulancia());
+            IVistaBD vistaBD = new JframeBD();
+            //creo el controlador y le paso al vista y el modelo
+            ControladorBD controladorbd = new ControladorBD(vistaBD,modelobd);
+
         }
     }
 

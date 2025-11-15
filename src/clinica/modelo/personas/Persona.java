@@ -65,6 +65,19 @@ public abstract class Persona {
     {
         this.domicilio = domicilio;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Persona)) return false;
+        Persona persona = (Persona) o;
+        return this.dni.equals(persona.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(dni);
+    }
 }
 
 

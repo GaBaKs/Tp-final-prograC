@@ -30,6 +30,6 @@ public class MiObserverVista implements Observer
         }
         else
             throw new IllegalArgumentException();
-        // hacer if de los hilos para mostrarlos, tmb con el mismo else arraylist de threads
+        
     }
 }

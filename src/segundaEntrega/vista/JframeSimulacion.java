@@ -18,8 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class JframeSimulacion extends JFrame implements IVistaSimulacion {
+public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -200,9 +202,12 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.txtAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
     }
+
+
     public JTextField getCantSolicitudes(){
-        return this.cantSol; //esto eta bien asi tipo text field?
+        return this.cantSol;
     }
+
     // para que el controlador actualice la vista(no se si esto deberia estar aca la verdad)
     public void setEstadoAmbulancia(String estado)
     {
@@ -238,6 +243,28 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion {
         this.btnIniciar.addActionListener(l);
         this.btnFinalizar.addActionListener(l);
     }
+
+    public void keyPressed(KeyEvent e)
+    {
+    }
+
+    public void keyReleased(KeyEvent e)
+    {
+        try
+        {
+            int h = Integer.parseInt(this.getCantSolicitudes().getText());
+            this.btnIniciar.setEnabled(true);
+        } catch (NumberFormatException exception)
+        {
+            this.btnIniciar.setEnabled(false);
+
+        }
+    }
+
+    public void keyTyped(KeyEvent e)
+    {
+    }
+
 
     //agregar boton de solicitar mantenimiento
 }

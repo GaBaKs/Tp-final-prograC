@@ -19,11 +19,7 @@ public interface IVistaBD {
     public JTextField getDNI();
     public JTextField getNumero();
 
-    public JButton getbtnAltaAsociados();
-    public JButton getbtnBajaAsociados();
-
     public Asociado getAsociadoSeleccionado();
 
-    public JPanel getJPanel(); //aplicado para el JOptionPanel.showDialog() que necesita un component
     public void actualizaLista(ArrayList<Asociado> asociadosSistema);
 }
