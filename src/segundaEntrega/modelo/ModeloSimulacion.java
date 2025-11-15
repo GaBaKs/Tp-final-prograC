@@ -1,15 +1,16 @@
 package segundaEntrega.modelo;
 
-import segundaEntrega.modelo.negocio.Ambulancia;
 import segundaEntrega.modelo.negocio.Asociado;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class InicioSimulacion {
-    public Ambulancia ambulancia = new Ambulancia();
+public class ModeloSimulacion {
     static boolean simulacionactiva;
+
+
+    public ModeloSimulacion() {
+    }
 
 
     public void inicia(int cantsolicitudes, ArrayList<Asociado> asociados) {
@@ -18,19 +19,13 @@ public class InicioSimulacion {
 
         while (iterator.hasNext()) {          // mientras haya siguiente
             Asociado asociado = iterator.next();    // obtengo el siguiente
-            asociado.start();
+            Thread hilo = new Thread(asociado);
+            hilo.start();
         }
     }
 
-    public Ambulancia getAmbulancia() {
-        return ambulancia;
-    }
-
     public void finalizar() {
-            simulacionactiva = false;
+        simulacionactiva = false;
 
-    }
-    public void solicitudMantenimiento(){
-        operario1.start();
     }
 }

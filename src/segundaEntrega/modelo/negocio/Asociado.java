@@ -48,4 +48,5 @@ public class Asociado extends Persona implements Runnable {
     public String toString() {
         return this.getN_A() + " (" + this.getDni() + ")";
     }
+
 }

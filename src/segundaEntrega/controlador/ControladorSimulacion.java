@@ -1,20 +1,17 @@
 package segundaEntrega.controlador;
 
-import segundaEntrega.modelo.InicioSimulacion;
+import segundaEntrega.modelo.ModeloSimulacion;
 import segundaEntrega.vista.IVistaSimulacion;
-import segundaEntrega.vista.JframeExcepciones;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 public class ControladorSimulacion implements ActionListener {
-    private InicioSimulacion inicioSimulacion;
+    private ModeloSimulacion inicioSimulacion;
     private IVistaSimulacion vista;
 
-    public ControladorSimulacion(IVistaSimulacion vista, InicioSimulacion inicioSimulacion) {
+    public ControladorSimulacion(IVistaSimulacion vista, ModeloSimulacion inicioSimulacion) {
         this.inicioSimulacion = inicioSimulacion;
         this.vista = vista;
         this.vista.addActionListener(this);

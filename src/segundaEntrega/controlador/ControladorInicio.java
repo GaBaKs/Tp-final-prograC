@@ -1,6 +1,6 @@
 package segundaEntrega.controlador;
 
-import segundaEntrega.modelo.InicioSimulacion;
+import segundaEntrega.modelo.ModeloSimulacion;
 import segundaEntrega.modelo.ModeloBD;
 import segundaEntrega.vista.*;
 
@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 
 public class ControladorInicio implements ActionListener {
 
-    private InicioSimulacion inicioSimulacion;
+    private ModeloSimulacion inicioSimulacion;
     private IVistaInicio vista;
 
 
 
-    public ControladorInicio(InicioSimulacion inicioSimulacion, IVistaInicio vista)
+    public ControladorInicio(ModeloSimulacion inicioSimulacion, IVistaInicio vista)
     {
         this.inicioSimulacion = inicioSimulacion;
         this.vista = vista;
@@ -31,7 +31,7 @@ public class ControladorInicio implements ActionListener {
             this.vista.cerrar();
 
             IVistaSimulacion vistasimulacion = new JframeSimulacion();
-            InicioSimulacion modeloInicioSimulacion = new InicioSimulacion(); //el controlador deberia conocer esto no?
+            ModeloSimulacion modeloInicioSimulacion = new ModeloSimulacion(); //el controlador deberia conocer esto no?
 
             // creo el controlador de principal y le paso vista y modelo
             ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, modeloInicioSimulacion);

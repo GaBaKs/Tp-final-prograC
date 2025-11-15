@@ -8,7 +8,6 @@ import segundaEntrega.patrones.patronState.IState;
 import java.util.Observable;
 
 public class Ambulancia extends Observable {
-    private Operario operario;
     protected IState ambulanciaState;
     private String estadoString;
 
@@ -20,6 +19,7 @@ public class Ambulancia extends Observable {
 
     public Ambulancia()
     {
+
         this.ambulanciaState=new Disponible(this);
     }
 
@@ -32,6 +32,8 @@ public class Ambulancia extends Observable {
             this.notifyObservers(asociado.getN_A() + "Esta esperando a ser atendido a domicilio");
             wait();
         }
+        // si salimos del bucle, esto tiene que ser verdad
+        assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
         this.ambulanciaState.pacienteSolicitaAtencion(asociado);
         this.asociado = asociado;
         this.setChanged();
@@ -50,6 +52,8 @@ public class Ambulancia extends Observable {
                 this.notifyObservers(asociado.getN_A() + "Esta esperando a ser trasladado por la ambulancia.");
                 wait();
             }
+        // si salimos del bucle, esto tiene que ser verdad
+        assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
         this.ambulanciaState.pacienteSolicitaAtencion(asociado);
         this.asociado = asociado;
         this.setChanged();
@@ -67,6 +71,8 @@ public class Ambulancia extends Observable {
             this.notifyObservers(operario.getN_A()+"El operario esta esperando para mandar la ambulancia a mantenimiento.");
             wait();
         }
+        // si salimos del bucle, esto tiene que ser verdad
+        assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
         this.setChanged();
         this.notifyObservers("El operario mando a la ambulancia a mantenimiento.");
         this.ambulanciaState.solicitudMantenimiento();
@@ -100,6 +106,7 @@ public class Ambulancia extends Observable {
 
     public void setDisponible(boolean condicion)
     {
+        assert this != null : "El contexto (Ambulancia) no puede ser nulo";
         this.disponible =condicion;
     }
 

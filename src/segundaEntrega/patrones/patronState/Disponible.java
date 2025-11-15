@@ -33,6 +33,8 @@ public class Disponible implements IState {
     public void solicitudMantenimiento()
     {
         this.ambulancia.setAmbulanciaState(new EnTaller(this.ambulancia)); // a taller
+        // Post-condicion:
+        assert this.ambulancia.getAmbulanciaState() instanceof EnTaller : "La transicion de estado fallo";
     }
 
 }
