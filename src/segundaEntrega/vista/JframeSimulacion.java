@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 /** Vista principal de la simulación del sistema de ambulancias. */
@@ -45,38 +46,36 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
     private JLabel lblCantAsociados;
     private JTextField cantAso;
     private JScrollPane scrollPane_1;
-    private JPanel panel_4;
     private JLabel lblN_M;
     private JTextField textFieldN_M;
     private JPanel panel_1;
     private JButton btnSolMan;
     private JPanel SolMan;
 
-    /**
-     * Create the frame.
-     */
+
     public JframeSimulacion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 871, 515);
+        setResizable(true);
+
         this.contentPane = new JPanel();
         this.contentPane.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(this.contentPane);
-        this.contentPane.setLayout(new GridLayout(0, 2, 0, 0));
+
+        this.contentPane.setLayout(new BorderLayout(5, 5));
 
         this.Principal = new JPanel();
         this.Principal.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        this.contentPane.add(this.Principal);
-        this.Principal.setLayout(new GridLayout(1, 2, 0, 0));
+        this.contentPane.add(this.Principal, BorderLayout.CENTER);
+        this.Principal.setLayout(new GridLayout(1, 1, 0, 0));
 
         this.panel = new JPanel();
         this.panel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         this.Principal.add(this.panel);
+
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.columnWidths = new int[]{452, 0};
-        gbl_panel.rowHeights = new int[]{331, 331, 0, 0, 0, 0};
-        gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-        gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+        gbl_panel.columnWeights = new double[]{1.0};
+        gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0};
         this.panel.setLayout(gbl_panel);
 
         this.izquierda = new JPanel();
@@ -124,17 +123,14 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
         this.estadoAmbulancia.add(this.panel_3);
 
         this.lblEstadoAmbulancia = new JLabel("Estado de la ambulancia:");
-        this.lblEstadoAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 19));
+        this.lblEstadoAmbulancia.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         this.lblEstadoAmbulancia.setVerticalAlignment(SwingConstants.BOTTOM);
         this.lblEstadoAmbulancia.setHorizontalAlignment(SwingConstants.LEFT);
         this.panel_3.add(this.lblEstadoAmbulancia);
 
-        this.textAreaEstadoAmbulancia = new JTextArea();
+        this.textAreaEstadoAmbulancia = new JTextArea(2, 15);
         this.textAreaEstadoAmbulancia.setEditable(false);
         this.panel_3.add(this.textAreaEstadoAmbulancia);
-
-        this.panel_4 = new JPanel();
-        this.izquierda.add(this.panel_4);
 
 
         this.simulacion = new JPanel();
@@ -147,30 +143,30 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
         gbc_simulacion.gridx = 0;
         gbc_simulacion.gridy = 3;
 
-
-
         this.panel.add(this.simulacion, gbc_simulacion);
-        this.simulacion.setLayout(new GridLayout(0, 2, 0, 0));
+
+
+        this.simulacion.setLayout(new BorderLayout());
 
         this.sim = new JPanel();
-        this.simulacion.add(this.sim);
+        this.simulacion.add(this.sim, BorderLayout.CENTER);
 
         this.lblCantSol = new JLabel("Cantidad de solicitudes");
         this.sim.add(this.lblCantSol);
 
         this.cantSol = new JTextField();
         this.sim.add(this.cantSol);
-        this.cantSol.setColumns(10);
+        this.cantSol.setColumns(5);
 
         this.lblCantAsociados = new JLabel("Cantidad de asociados");
         this.sim.add(this.lblCantAsociados);
 
         this.cantAso = new JTextField();
         this.sim.add(this.cantAso);
-        this.cantAso.setColumns(10);
+        this.cantAso.setColumns(5);
 
         this.panel_2 = new JPanel();
-        this.simulacion.add(this.panel_2);
+        this.simulacion.add(this.panel_2, BorderLayout.EAST);
 
         this.btnIniciar = new JButton("Iniciar");
         this.panel_2.add(this.btnIniciar);
@@ -180,7 +176,7 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
 
         this.movimientosAsociado = new JPanel();
         this.movimientosAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        this.contentPane.add(this.movimientosAsociado);
+        this.contentPane.add(this.movimientosAsociado, BorderLayout.EAST);
         this.movimientosAsociado.setBorder(new TitledBorder(null, "Notificaciones del Asociado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
         this.movimientosAsociado.setLayout(new GridLayout(1,1,0,0));
@@ -188,11 +184,15 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
         this.movimientosAsociado.add(this.scrollPane_1);
 
 
-        this.txtAsociado = new JTextArea();
+        this.txtAsociado = new JTextArea(5, 25);
         this.txtAsociado.setEditable(false);
         this.scrollPane_1.setViewportView(this.txtAsociado);
         this.txtAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
+
+        pack();
+        setSize(900, 400);
+        setLocationRelativeTo(null);
     }
 
     /** Obtiene el campo de texto donde el usuario ingresa la cantidad de solicitudes. */
@@ -246,6 +246,7 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
     public void addActionListener(ActionListener l) {
         this.btnIniciar.addActionListener(l);
         this.btnFinalizar.addActionListener(l);
+        this.btnSolMan.addActionListener(l);
     }
 
     /** Evento de teclado ejecutado al soltar una tecla. */
@@ -268,15 +269,6 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
 
     public void keyTyped(KeyEvent e)
     {
-    }
-
-    @Override
-    public JPanel getContentPane() {
-        return contentPane;
-    }
-
-    public void setContentPane(JPanel contentPane) {
-        this.contentPane = contentPane;
     }
 
 }

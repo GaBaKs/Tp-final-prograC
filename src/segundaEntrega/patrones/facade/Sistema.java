@@ -38,7 +38,7 @@ public class Sistema {
     public Sistema(ControladorBD controladorBD, ControladorInicio controladorInicio, ControladorSimulacion controladorSimulacion) {
         this.asociadosSistema = new ArrayList<>();
         this.asociadoDAO = new DAOAsociado();
-        this.ambulancia =Ambulancia.getInstance(); // instancia unica del sistema
+        this.ambulancia = Ambulancia.getInstance(); // instancia unica del sistema
         this.controladorBD = controladorBD;
         this.controladorInicio= controladorInicio;
         this.controladorSimulacion = controladorSimulacion;

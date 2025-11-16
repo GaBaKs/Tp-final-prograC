@@ -18,6 +18,7 @@ import segundaEntrega.modelo.ModeloBD;
 import segundaEntrega.modelo.ModeloSimulacion;
 import segundaEntrega.modelo.negocio.Ambulancia;
 import segundaEntrega.persistencia.basededatos.ConexionBD;
+import segundaEntrega.vista.IVistaInicio;
 import segundaEntrega.vista.JframeBD;
 import segundaEntrega.vista.JframeInicio;
 import segundaEntrega.vista.JframeSimulacion;
@@ -84,8 +85,8 @@ public class Prueba {
         Ambulancia ambulancia=Ambulancia.getInstance();
 
         //creacion de MVC inicio
-        JframeInicio ventanaInicio=new JframeInicio();
-        ventanaInicio.setVisible(true);
+        IVistaInicio ventanaInicio=new JframeInicio();
+        ventanaInicio.arranca();
 
         ModeloSimulacion modeloSimulacion=new ModeloSimulacion(ambulancia);
 
