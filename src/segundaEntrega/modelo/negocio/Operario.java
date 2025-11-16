@@ -1,6 +1,7 @@
 package segundaEntrega.modelo.negocio;
 
 import clinica.modelo.personas.Persona;
+import segundaEntrega.controlador.ControladorBD;
 
 /**
  * Representa un Operario que extiende la funcionalidad de Persona y actúa como un hilo (Thread).
@@ -8,7 +9,9 @@ import clinica.modelo.personas.Persona;
  * de forma concurrente, mientras la simulación esté activa.
  */
 public class Operario extends Persona implements Runnable{
+    /** {@link Ambulancia} */
     protected Ambulancia ambulancia;
+    /** bandera que dice si el programa se detuvo o no (true==sigue corriendo el programa) */
     protected boolean simulacionactiva;
 
     public Operario(String dni, String n_A, String domicilio, String ciudad, String telefono) {

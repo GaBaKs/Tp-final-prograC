@@ -1,5 +1,7 @@
 package segundaEntrega.modelo.negocio;
 import clinica.modelo.personas.Persona;
+import segundaEntrega.controlador.ControladorBD;
+
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -9,10 +11,15 @@ import java.util.ArrayList;
  * Hereda de Persona (Datos) e implementa Runnable (Lógica de Hilo).
  */
 public class Asociado extends Persona implements Runnable {
+    /** cantidad de solicitudes que le hara a la ambulancia*/
     protected int numsolicitudes;
+    /** {@link Ambulancia } */
     protected Ambulancia ambulancia;// El monitor (recurso compartido) que necesita
+    /** bandera que dice si el programa se detuvo o no (true==sigue corriendo el programa) */
     protected boolean simulacionactiva; // Flag para detener el hilo de forma segura
+    /** atributo que nos ayuda a randomizar que solicita */
     Random random = new Random();
+    /** se usa como contenedor del numero random para solicitar */
     int numero;
 
     public Asociado(String dni, String n_A, String domicilio, String ciudad,String telefono,int numsolicitudes, Ambulancia ambulancia) {
@@ -42,7 +49,7 @@ public class Asociado extends Persona implements Runnable {
         int i=0;
         // El hilo vive mientras la simulación esté activa y le queden solicitudes
         while( simulacionactiva && i < numsolicitudes){
-            numero=random.nextInt(2) + 1; //Decide aleatoriamente que tipo de solicitud pide
+           numero=random.nextInt(2) + 1; //Decide aleatoriamente que tipo de solicitud pide
             try {
                 if (numero==1)
                  this.ambulancia.pacienteSolicitaAtencion(this);
@@ -66,6 +73,9 @@ public class Asociado extends Persona implements Runnable {
         return this.getN_A() + " (" + this.getDni() + ")";
     }
 
+    /**
+     *  setea el atributo booleano simulacionactiva que representa si la simulacion fue detenida o no(true sigue, false se detuvo)
+     */
     public void setSimulacionActiva(boolean simulacionactiva) {
         this.simulacionactiva = simulacionactiva;
     }

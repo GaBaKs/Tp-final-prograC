@@ -1,5 +1,6 @@
 package segundaEntrega.modelo;
 
+import segundaEntrega.controlador.ControladorBD;
 import segundaEntrega.modelo.negocio.Ambulancia;
 import segundaEntrega.modelo.negocio.Asociado;
 import segundaEntrega.modelo.negocio.Operario;
@@ -16,9 +17,13 @@ import java.util.Iterator;
  * </p>
  */
 public class ModeloSimulacion {
+    /** {@link Operario } */
     public Operario operario;
+    /** {@link Ambulancia } */
     private Ambulancia ambulancia; // Necesita saber de la ambulancia
+    /** arraylist de asociados que estan en hilos concurrentes {@link Asociado }*/
     private ArrayList<Asociado> asociadosenHilos=new ArrayList();
+    /** {@link RetornoAutomatico } */
     RetornoAutomatico retorno;
 
     public ModeloSimulacion(Ambulancia ambulancia) {
@@ -56,7 +61,7 @@ public class ModeloSimulacion {
     }
 
     /**
-     * Lanza el thread de ejecución del Operario.
+     * Lanza el thread que representa al Operario.
      * <p>
      * El Operario inicia su ciclo de solicitudes de mantenimiento
      * a la {@code Ambulancia}.

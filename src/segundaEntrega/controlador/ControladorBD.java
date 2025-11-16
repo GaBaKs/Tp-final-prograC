@@ -10,9 +10,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * ControladorBD actúa como intermediario entre la Vista y el Modelo,
+ * gestionando las acciones del usuario relacionadas con la administración
+ * de asociados en la base de datos.
+ */
 public class ControladorBD implements ActionListener {
+    /** {@link IVistaBD } */
     private IVistaBD vista;
+    /** {@link ModeloBD } */
     private ModeloBD modelo;
 
     public ControladorBD(IVistaBD ventana, ModeloBD modelo)
@@ -23,6 +29,12 @@ public class ControladorBD implements ActionListener {
         this.vista.actualizaLista(this.modelo.getAsociados());
     }
 
+    /**
+     * Maneja los eventos generados por la vista. Según el comando recibido,
+     * ejecuta la operación correspondiente (alta, baja, borrar base, datos de prueba).
+     *
+     * @param e evento de acción generado por la vista
+     */
     public void actionPerformed (ActionEvent e)
     {
         String comando = e.getActionCommand();
@@ -38,6 +50,11 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * Realiza el alta de un nuevo asociado. Valida los campos de la vista,
+     * construye un objeto Asociado, lo convierte en DTO y lo delega al modelo
+     * para ser persistido. Actualiza la vista y muestra mensajes al usuario.
+     */
     public void altaAsociado() {
         try {
             // Validar campos
@@ -73,6 +90,10 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * Elimina el asociado seleccionado en la vista. Solicita al modelo que
+     * realice la operación y luego actualiza la lista en pantalla.
+     */
     public void bajaAsociado() {
         Asociado seleccionado = this.vista.getAsociadoSeleccionado();
 
@@ -93,6 +114,11 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * Solicita confirmación al usuario para eliminar todos los datos
+     * de la base de asociados. Si se confirma, reinicia las tablas mediante
+     * el modelo y actualiza la vista.
+     */
     public void inicializarBaseDeDatos() {
         try {
             // Pedir confirmación
@@ -118,6 +144,10 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * Carga en la base de datos un conjunto fijo de asociados para pruebas.
+     * Luego refresca la vista.
+     */
     public void agregaDatosPrueba(){
         try {
             Asociado asociado1= new Asociado("12345623","Pipo","Florisbelo 2738","Mar Del Plata","2235379123",4,modelo.getAmbulanciaCompartida());
@@ -141,6 +171,9 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * inicialización de la base de datos.
+     */
     public void inicializarBD() {
         try {
             // Pide confirmación a la Vista
@@ -161,9 +194,22 @@ public class ControladorBD implements ActionListener {
         }
     }
 
+    /**
+     * Convierte un objeto Asociado de la lógica interna a un DTO para la persistencia.
+     *
+     * @param asociado instancia de Asociado
+     * @return DTOAsociado correspondiente
+     */
     public DTOAsociado toDTO(Asociado asociado) {
         return modelo.toDTO(asociado);
     }
+
+    /**
+     * Convierte un DTOAsociado de la base de datos a un objeto Asociado de lógica.
+     *
+     * @param dto DTOAsociado origen
+     * @return objeto Asociado equivalente
+     */
     public Asociado fromDTO(DTOAsociado dto) {
         return modelo.fromDTO(dto);
     }

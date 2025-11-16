@@ -22,9 +22,13 @@ import java.util.ArrayList;
 public class Sistema {
     private ArrayList<Asociado> asociadosSistema; //aca estan los asociados q pide el usuario
     private IDAOAsociado asociadoDAO;
+    /** {@link Ambulancia }*/
     private Ambulancia ambulancia;
+    /** {@link ControladorBD } */
     private ControladorBD controladorBD;
+    /** {@link ControladorInicio } */
     private ControladorInicio  controladorInicio;
+    /** {@link ControladorSimulacion } */
     private ControladorSimulacion controladorSimulacion;
 
 

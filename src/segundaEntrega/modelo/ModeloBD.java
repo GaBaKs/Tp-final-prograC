@@ -1,6 +1,7 @@
 package segundaEntrega.modelo;
 
 import excepciones.DuplicadoException;
+import segundaEntrega.controlador.ControladorBD;
 import segundaEntrega.modelo.negocio.Ambulancia;
 import segundaEntrega.modelo.negocio.Asociado;
 import segundaEntrega.persistencia.DAOAsociadoYDTO.DAOAsociado;
@@ -19,8 +20,11 @@ import java.util.ArrayList;
  */
     public class ModeloBD
     {
+        /** {@link IDAOAsociado } */
         private IDAOAsociado dao;
+        /** arraylist de {@link Asociado } */
         private ArrayList<Asociado> listaAsociadosMemoria; //aca estan todos los asociados
+        /** {@link Ambulancia } */
         private Ambulancia ambulanciaCompartida; // Para crear nuevos Asociados
 
         public ModeloBD(Ambulancia ambulancia) {

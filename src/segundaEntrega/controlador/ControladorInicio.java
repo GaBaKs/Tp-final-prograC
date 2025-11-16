@@ -8,12 +8,29 @@ import segundaEntrega.vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Controlador principal para la ventana de inicio ({@link IVistaInicio}).
+ * <p>
+ * Actúa como el punto de entrada de la aplicación, gestionando la navegación
+ * a los módulos de simulación y base de datos.
+ * <p>
+ * Es responsable de:
+ * <ul>
+ * <li>Escuchar los eventos de acción (botones) de la vista de inicio.</li>
+ * <li>Instanciar los modelos principales ({@link ModeloBD}, {@link ModeloSimulacion}).</li>
+ * <li>Cerrar la vista de inicio y lanzar los controladores y vistas
+ * de los módulos seleccionados.</li>
+ */
 public class ControladorInicio implements ActionListener {
-
+    /** {@link ModeloSimulacion } */
     private ModeloSimulacion inicioSimulacion;
+    /** {@link IVistaInicio } */
     private IVistaInicio vista;
+    /** {@link Ambulancia } */
     private Ambulancia ambulancia;
+    /** {@link ModeloBD } */
     private ModeloBD modeloBD;
+    /** {@link ModeloSimulacion } */
     private ModeloSimulacion modeloSimulacion;
 
 
@@ -29,6 +46,14 @@ public class ControladorInicio implements ActionListener {
     }
 
 
+    /**
+     * Maneja los eventos de acción provenientes de la vista de inicio.
+     * <p>
+     * Determina qué módulo lanzar basándose en el
+     * comando recibido.
+     * </p>
+     * @param e El {@link ActionEvent} disparado (ej. clic en un botón).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();

@@ -9,9 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * ControladorSimulacion coordina las acciones entre la vista de simulación
+ * y el modelo que gestiona la ejecución de la misma.
+ *
+ * Este controlador también administra la lista de asociados que participan
+ * en la simulación.
+ */
 public class ControladorSimulacion implements ActionListener {
+    /** {@link ModeloSimulacion } */
     private ModeloSimulacion inicioSimulacion;
+    /** {@link IVistaSimulacion } */
     private IVistaSimulacion vista;
+    /** arraylist de {@link Asociado } */
     private ArrayList<Asociado> asociados;
 
     public ControladorSimulacion(IVistaSimulacion vista, ModeloSimulacion inicioSimulacion, ArrayList<Asociado> asociados) {
@@ -21,6 +31,12 @@ public class ControladorSimulacion implements ActionListener {
         this.asociados = asociados;
     }
 
+    /**
+     * Maneja los comandos enviados desde la vista. Según el texto del comando,
+     * inicia la simulación, la finaliza o solicita mantenimiento al modelo.
+     *
+     * @param e evento de acción generado por la vista
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
@@ -44,6 +60,13 @@ public class ControladorSimulacion implements ActionListener {
         }
     }
 
+    /**
+     * Obtiene y retorna la cantidad de solicitudes ingresadas por el usuario
+     * en la vista de simulación.
+     *
+     * @return cantidad de solicitudes numerada desde el campo correspondiente
+     * @throws NumberFormatException si el valor ingresado no es un número entero
+     */
     public int getCantSolicitudes() {
             int valor = Integer.parseInt(vista.getCantSolicitudes().getText());
             return valor;

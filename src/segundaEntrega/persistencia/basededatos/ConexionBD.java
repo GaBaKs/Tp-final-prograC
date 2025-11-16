@@ -1,4 +1,6 @@
 package segundaEntrega.persistencia.basededatos;
+import segundaEntrega.modelo.negocio.Ambulancia;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +14,9 @@ import java.sql.SQLException;
  * </p>
  */
 public class ConexionBD {
+    /** {@link ConexionBD } */
     private static ConexionBD instance;
+    /** {@link Connection } */
     private Connection connection;
 
     private static final String URL = "jdbc:mysql://localhost:3306/grupo_4";

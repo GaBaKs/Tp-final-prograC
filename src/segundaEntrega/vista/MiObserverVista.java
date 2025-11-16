@@ -12,9 +12,10 @@ public class MiObserverVista implements Observer
 {
     /**
      * Referencia a la vista donde se mostrarán los cambios de estado y mensajes.
-     * Esta relación es de composición: la vista es necesaria para que este observer funcione.
+     * Esta relación es de composición.
      */
     IVistaSimulacion JframeSimulacion;      // COMPOSICION con la vista
+    /** {@link Ambulancia } */
     Ambulancia observado;
 
 
@@ -37,7 +38,7 @@ public class MiObserverVista implements Observer
      * Metodo invocado automáticamente cada vez que la ambulancia notifica un cambio.
      *
      * @param ambulancia el observable que generó la notificación
-     * @param mensaje un objeto opcional enviado por el observable (en este caso un String)
+     * @param mensaje un objeto enviado por el observable (en este caso un String)
      */
     @Override
     public void update(Observable ambulancia, Object mensaje) {
