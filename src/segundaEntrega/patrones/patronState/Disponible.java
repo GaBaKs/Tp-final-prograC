@@ -13,6 +13,7 @@ public class Disponible implements IState {
         this.ambulancia=a;
         this.ambulancia.setEstaMantenimiento(false);
         this.ambulancia.setDisponible(true);
+        this.ambulancia.setEstadoString("Disponible");
     }
 
     /**

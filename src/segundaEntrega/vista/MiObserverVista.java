@@ -34,7 +34,7 @@ public class MiObserverVista implements Observer
 
 
     /**
-     * Método invocado automáticamente cada vez que la ambulancia notifica un cambio.
+     * Metodo invocado automáticamente cada vez que la ambulancia notifica un cambio.
      *
      * @param ambulancia el observable que generó la notificación
      * @param mensaje un objeto opcional enviado por el observable (en este caso un String)

@@ -95,13 +95,6 @@ public class Prueba {
         //creo el singleton
         ConexionBD conexionBD=ConexionBD.getInstance();
 
-
-
-
-
-
-
-
 	}
 
 }

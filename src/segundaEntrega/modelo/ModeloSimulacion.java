@@ -52,6 +52,8 @@ public class ModeloSimulacion {
             hilo.start();
             i++;
         }
+        Thread retorno=new RetornoAutomatico(true);
+        retorno.start();
     }
 
     /**

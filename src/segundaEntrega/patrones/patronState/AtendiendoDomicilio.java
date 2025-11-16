@@ -15,7 +15,7 @@ public class AtendiendoDomicilio implements IState {
         this.ambulancia=a;
         this.ambulancia.setDisponible(false);
         this.ambulancia.setEstaMantenimiento(false);
-
+        this.ambulancia.setEstadoString("Atendiendo a domicilio");
     }
 
     /**

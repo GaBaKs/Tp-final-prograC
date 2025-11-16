@@ -13,6 +13,7 @@ public class RegresandoSinPaciente implements IState{
         this.ambulancia=a;
         this.ambulancia.setDisponible(true);
         this.ambulancia.setEstaMantenimiento(false);
+        this.ambulancia.setEstadoString("Regresando sin paciente");
     }
 
     /**

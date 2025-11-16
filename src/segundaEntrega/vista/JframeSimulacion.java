@@ -189,6 +189,7 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
         this.scrollPane_1.setViewportView(this.txtAsociado);
         this.txtAsociado.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
+        this.movimientosAsociado.setPreferredSize(new java.awt.Dimension(600, 200));
 
         pack();
         setSize(900, 400);

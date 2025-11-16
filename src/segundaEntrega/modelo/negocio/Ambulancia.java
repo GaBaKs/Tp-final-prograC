@@ -1,6 +1,7 @@
 package segundaEntrega.modelo.negocio;
 
 
+import clinica.modelo.personas.Persona;
 import segundaEntrega.modelo.TiempoMuerto;
 import segundaEntrega.patrones.patronState.Disponible;
 import segundaEntrega.patrones.patronState.IState;
@@ -23,14 +24,17 @@ public class Ambulancia extends Observable {
     private static Ambulancia instance;
 
     // Atributos de control del Monitor
-    protected Asociado asociado = null;        // El recurso "ocupado" (si no es null, está ocupada)
-    protected boolean disponible = false;      // Flag de estado (manejado por el State)
-    protected boolean estaMantenimiento = false; // Flag de estado (manejado por el State)
+    protected Asociado asociado;        // El recurso "ocupado" (si no es null, está ocupada)
+    protected boolean disponible;      // Flag de estado (manejado por el State)
+    protected boolean estaMantenimiento;  // Flag de estado (manejado por el State)
 
     private Ambulancia()
     {
         // La ambulancia siempre inicia en estado Disponible
         this.ambulanciaState=new Disponible(this);
+        this.disponible=true;
+        this.estaMantenimiento=false;
+        this.asociado=null;
     }
 
     public static Ambulancia getInstance() {
@@ -43,7 +47,7 @@ public class Ambulancia extends Observable {
 
     /**
      * Intenta atender a un asociado a domicilio.
-     * Es un metodo synchronized (Monitor) para garantizar acceso exclusivo.
+     * Es un metodo synchronized.
      *
      * @param asociado El hilo del asociado que solicita la atención.
      * @throws InterruptedException Si el hilo es interrumpido mientras está en wait().
@@ -52,22 +56,23 @@ public class Ambulancia extends Observable {
     {
         // El hilo debe esperar si la ambulancia está:
         // 1. Ocupada por otro asociado (asociado != null)
-        // 2. No disponible (ej. regresando)
+        // 2. No disponible
         // 3. En mantenimiento
         while (this.asociado != null  || !this.disponible || this.estaMantenimiento) {
             this.setChanged();
             this.notifyObservers(asociado.getN_A() + "Esta esperando a ser atendido a domicilio");
-            wait(); // Libera el lock (la llave) y se pone a dormir
+            wait();
         }
         // si salimos del bucle, esto tiene que ser verdad
         assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
         this.ambulanciaState.pacienteSolicitaAtencion(asociado); // Delega al estado (Patrón State)
-        this.asociado = asociado; //Toma el recurso
+
+        this.asociado = asociado;
         this.setChanged();
         this.notifyObservers(asociado.getN_A()+" esta siendo atendido a domicilio por la ambulancia.");
         TiempoMuerto.esperar(); // Simula el tiempo de la atención
-        this.asociado=null;// Libera el recurso
-        notifyAll(); // Despierta a TODOS los hilos (Asociados y Operarios) que esperaban
+        this.asociado=null;
+        notifyAll(); // Despierta a TODOS los hilos
 
     }
     /**
@@ -82,18 +87,18 @@ public class Ambulancia extends Observable {
              while (this.asociado != null || !disponible ||  this.estaMantenimiento)
              {
                 this.setChanged();
-                this.notifyObservers(asociado.getN_A() + "Esta esperando a ser trasladado por la ambulancia.");
+                this.notifyObservers(asociado.getN_A() + " esta esperando a ser trasladado por la ambulancia.");
                 wait();
             }
-        // si salimos del bucle, esto tiene que ser verdad
         assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
+
         this.ambulanciaState.pacienteSolicitaAtencion(asociado); //Delega el traslado al State
-        this.asociado = asociado; //Toma el recurso
+        this.asociado = asociado;
         this.setChanged();
         this.notifyObservers(asociado.getN_A()+" esta siendo trasladado por la ambulancia.");
         TiempoMuerto.esperar();
-        this.asociado=null; //Libera el recurso
-        notifyAll(); //Despierta a todos los hilos en espera
+        this.asociado=null;
+        notifyAll();
     }
 
     /**
@@ -105,29 +110,38 @@ public class Ambulancia extends Observable {
      */
     public synchronized void solicitaMantenimiento(Operario operario) throws InterruptedException
     {
-        while (this.asociado != null || !this.disponible || this.estaMantenimiento) {
+        while (this.asociado != null || !this.disponible || !this.estaMantenimiento) {
             this.setChanged();
-            this.notifyObservers(operario.getN_A()+"El operario esta esperando para mandar la ambulancia a mantenimiento.");
+            this.notifyObservers("El operario esta esperando para mandar la ambulancia a mantenimiento.");
             wait();
         }
-        // si salimos del bucle, esto tiene que ser verdad
         assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
         this.ambulanciaState.solicitudMantenimiento(); //Delega el estado
-        this.setChanged();
-        this.notifyObservers("El operario mando a la ambulancia a mantenimiento.");
-        TiempoMuerto.esperar(); // Simula el tiempo que tarda en ir al taller
-        notifyAll(); // Despierta a otros hilos (aunque la ambulancia seguirá no-disponible)
+        if (this.getEstadoString().equals("En taller")) {
+            this.setChanged();
+            this.notifyObservers(" El operario mando a la ambulancia a mantenimiento.");
+        }
+        else {
+            System.out.println(this.getEstadoString());
+            this.setChanged();
+            this.notifyObservers("La ambulancia esta regresando del taller");
+        }
+        TiempoMuerto.esperar();
+        notifyAll();
     }
 
 
     /**
-     * Metodo llamado por el estado para simular el evento de "retorno automático"
-     * (ej. fin de traslado o fin de mantenimiento).
+     * Metodo llamado por el estado para simular el evento de "retorno automático".
      */
-    public void retornoAutomatico() {
-            this.ambulanciaState.retornoAutomatico();
+    public synchronized void retornoAutomatico() throws InterruptedException
+    {
+        this.ambulanciaState.retornoAutomatico();
+        this.setChanged();
+        this.notifyObservers("");
+        TiempoMuerto.esperar();
+        notifyAll();
     }
-
 
     public IState getAmbulanciaState() {return this.ambulanciaState;}
     /**

@@ -41,7 +41,7 @@ public class Asociado extends Persona implements Runnable {
     public void run() {
         int i=0;
         // El hilo vive mientras la simulación esté activa y le queden solicitudes
-        while( i < numsolicitudes && simulacionactiva){
+        while( simulacionactiva && i < numsolicitudes){
             numero=random.nextInt(2) + 1; //Decide aleatoriamente que tipo de solicitud pide
             try {
                 if (numero==1)

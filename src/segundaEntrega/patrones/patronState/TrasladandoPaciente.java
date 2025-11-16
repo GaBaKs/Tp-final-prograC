@@ -12,6 +12,7 @@ public class TrasladandoPaciente implements IState {
         this.ambulancia=a;
         this.ambulancia.setEstaMantenimiento(false);
         this.ambulancia.setDisponible(false);
+        this.ambulancia.setEstadoString("Trasladando paciente");
     }
 
     /**
@@ -39,6 +40,6 @@ public class TrasladandoPaciente implements IState {
      * Cambia, si es posible, el estado actual al recibir una solicitud de mantenimiento por parte de un operario
      */
     @Override
-    public void solicitudMantenimiento()  {} //no llega nunca aca
+    public void solicitudMantenimiento()  {}
 
 }

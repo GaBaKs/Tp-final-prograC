@@ -13,6 +13,8 @@ public class Operario extends Persona implements Runnable{
 
     public Operario(String dni, String n_A, String domicilio, String ciudad, String telefono) {
         super(dni, n_A, domicilio, ciudad, telefono);
+        this.ambulancia=Ambulancia.getInstance();
+        simulacionactiva=true;
     }
 
     public Ambulancia getAmbulancia() {

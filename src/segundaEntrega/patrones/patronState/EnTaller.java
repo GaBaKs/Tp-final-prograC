@@ -13,6 +13,7 @@ public class EnTaller implements IState {
         this.ambulancia=a;
         this.ambulancia.setDisponible(false);
         this.ambulancia.setEstaMantenimiento(true);
+        this.ambulancia.setEstadoString("En taller");
     }
 
     /**
