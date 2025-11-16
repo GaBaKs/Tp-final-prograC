@@ -13,4 +13,6 @@ public interface IVistaSimulacion {
     public void appendMovimientosAsociados(String mensaje);
     public JTextField getNombreyApellido();
     public JTextField getCantAsociados();
+    public void enableSolMan();
+    public void disableSolMan();
 }

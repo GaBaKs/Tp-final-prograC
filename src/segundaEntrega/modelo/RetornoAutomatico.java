@@ -2,7 +2,7 @@ package segundaEntrega.modelo;
 
 import segundaEntrega.modelo.negocio.Ambulancia;
 
-public class RetornoAutomatico extends Thread{
+public class RetornoAutomatico implements Runnable{
 
     protected boolean simulacionActiva;
     Ambulancia ambulancia;
@@ -11,6 +11,11 @@ public class RetornoAutomatico extends Thread{
         this.simulacionActiva=simulacionactiva;
         ambulancia=Ambulancia.getInstance();
     }
+
+    public void setSimulacionActiva(boolean simulacionactiva){
+        this.simulacionActiva=simulacionactiva;
+    }
+
 
     @Override
     public void run() {

@@ -38,7 +38,7 @@ public class ControladorInicio implements ActionListener {
             this.vista.cerrar();
 
             IVistaSimulacion vistasimulacion = new JframeSimulacion();
-
+            vistasimulacion.disableSolMan();
             // Pasamos el modelo de simulación y la lista de asociados del modeloBD
             ControladorSimulacion contprincipal = new ControladorSimulacion(vistasimulacion, this.modeloSimulacion,this.modeloBD.getAsociados());
 

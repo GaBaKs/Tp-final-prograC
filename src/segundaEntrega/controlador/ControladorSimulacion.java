@@ -34,9 +34,11 @@ public class ControladorSimulacion implements ActionListener {
 
             //cambio a int
             this.inicioSimulacion.inicia(cantsolicitudesInicial,cantAsociadosTotal,asociados);//de alguna manera le tengo q mandar un arraylist de asociados
-
+            vista.enableSolMan();
         } else if (comando.equals("Finalizar")) {
+            System.out.println("FINALIZA");
             this.inicioSimulacion.finalizar();
+            vista.disableSolMan();
         } else if (comando.equals("Solicitar mantenimiento")) {
             this.inicioSimulacion.solicitaMantenimiento();
         }

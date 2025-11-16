@@ -16,15 +16,15 @@ import java.util.Iterator;
  * </p>
  */
 public class ModeloSimulacion {
-    public volatile boolean simulacionactiva;
     public Operario operario;
     private Ambulancia ambulancia; // Necesita saber de la ambulancia
     private ArrayList<Asociado> asociadosenHilos=new ArrayList();
-
+    RetornoAutomatico retorno;
 
     public ModeloSimulacion(Ambulancia ambulancia) {
         this.ambulancia = ambulancia;
 
+        retorno=new RetornoAutomatico(true);
     }
 
 
@@ -40,20 +40,19 @@ public class ModeloSimulacion {
      */
 
     public void inicia(int cantsolicitudes, int cantAsociados, ArrayList<Asociado> asociados) {
-        simulacionactiva = true; // Pone en 'true' la bandera DE ESTA INSTANCIA
         int i=0;
         Iterator<Asociado> iterator = asociados.iterator(); // pido el iterator
         while (iterator.hasNext() && i<cantAsociados) {// mientras haya siguiente
             Asociado asociado = iterator.next();    // obtengo el siguiente
             Thread hilo = new Thread(asociado);
-            asociadosenHilos.add(asociado);
             asociado.setSimulacionActiva(true);
             asociado.setNumsolicitudes(cantsolicitudes);
+            asociadosenHilos.add(asociado);
             hilo.start();
             i++;
         }
-        Thread retorno=new RetornoAutomatico(true);
-        retorno.start();
+        Thread hiloRetorno = new Thread(retorno);
+        hiloRetorno.start();
     }
 
     /**
@@ -64,7 +63,6 @@ public class ModeloSimulacion {
      * </p>
      */
     public void solicitaMantenimiento(){
-        simulacionactiva=true;
         Operario op = new Operario("2172654","Han Solo","matheu","Mar Del Plata","223");
         op.setSimulacionActiva(true);
         Thread hilo = new Thread(op);
@@ -74,15 +72,13 @@ public class ModeloSimulacion {
     /**
      * Finaliza la simulación concurrente.
      * <p>
-     * Establece la bandera {@code simulacionactiva} a {@code false}, lo que
-     * debe provocar que los bucles {@code while(simulacionactiva)} de los threads
+     * Debe provocar que los bucles de los threads
      * {@code Asociado} y {@code Operario} terminen su ejecución de forma segura.
      * </p>
      */
     public void finalizar() {
-        simulacionactiva = false;
-        operario.setSimulacionActiva(false);
         Iterator<Asociado> iterator = asociadosenHilos.iterator();
+        retorno.setSimulacionActiva(false);
 
         while (iterator.hasNext()) {
             Asociado asociado = iterator.next();

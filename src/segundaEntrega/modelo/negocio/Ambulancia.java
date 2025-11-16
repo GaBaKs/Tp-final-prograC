@@ -60,7 +60,7 @@ public class Ambulancia extends Observable {
         // 1. Ocupada por otro asociado (asociado != null)
         // 2. No disponible
         // 3. En mantenimiento
-        while (this.asociado != null  || !this.disponible || this.estaMantenimiento) {
+        while (this.asociado != null  || !this.disponible || this.estaMantenimiento ) {
             this.setChanged();
             this.notifyObservers(asociado.getN_A() + "Esta esperando a ser atendido a domicilio");
             wait();
@@ -86,7 +86,7 @@ public class Ambulancia extends Observable {
      */
     public synchronized void pacienteSolicitaTraslado (Asociado asociado) throws InterruptedException
     {
-             while (this.asociado != null || !this.disponible || this.estaMantenimiento)
+             while (this.asociado != null || !this.disponible || this.estaMantenimiento || this.estaRegresando)
              {
                 this.setChanged();
                 this.notifyObservers(asociado.getN_A() + " esta esperando a ser trasladado por la ambulancia.");
@@ -144,7 +144,7 @@ public class Ambulancia extends Observable {
         }
         this.ambulanciaState.retornoAutomatico();
         this.setChanged();
-        this.notifyObservers("asdas");
+        this.notifyObservers("Retorno automatico a la clinica");
         TiempoMuerto.esperar();
         notifyAll();
     }

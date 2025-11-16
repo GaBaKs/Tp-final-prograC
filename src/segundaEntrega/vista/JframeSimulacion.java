@@ -272,4 +272,12 @@ public class JframeSimulacion extends JFrame implements IVistaSimulacion, KeyLis
     {
     }
 
+    public void enableSolMan(){
+        this.btnSolMan.setEnabled(true);
+    }
+
+    public void disableSolMan(){
+        this.btnSolMan.setEnabled(false);
+    }
+
 }
