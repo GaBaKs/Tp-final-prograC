@@ -27,6 +27,7 @@ public class Ambulancia extends Observable {
     protected Asociado asociado;        // El recurso "ocupado" (si no es null, está ocupada)
     protected boolean disponible;      // Flag de estado (manejado por el State)
     protected boolean estaMantenimiento;  // Flag de estado (manejado por el State)
+    protected boolean estaRegresando;
 
     private Ambulancia()
     {
@@ -35,6 +36,7 @@ public class Ambulancia extends Observable {
         this.disponible=true;
         this.estaMantenimiento=false;
         this.asociado=null;
+        this.estaRegresando=false;
     }
 
     public static Ambulancia getInstance() {
@@ -84,7 +86,7 @@ public class Ambulancia extends Observable {
      */
     public synchronized void pacienteSolicitaTraslado (Asociado asociado) throws InterruptedException
     {
-             while (this.asociado != null || !disponible ||  this.estaMantenimiento)
+             while (this.asociado != null || !this.disponible || this.estaMantenimiento)
              {
                 this.setChanged();
                 this.notifyObservers(asociado.getN_A() + " esta esperando a ser trasladado por la ambulancia.");
@@ -110,19 +112,20 @@ public class Ambulancia extends Observable {
      */
     public synchronized void solicitaMantenimiento(Operario operario) throws InterruptedException
     {
-        while (this.asociado != null || !this.disponible || !this.estaMantenimiento) {
+        while (this.asociado != null || (!this.disponible && !this.estaMantenimiento) || this.estaRegresando){
             this.setChanged();
             this.notifyObservers("El operario esta esperando para mandar la ambulancia a mantenimiento.");
             wait();
         }
         assert this.asociado == null && this.disponible && !this.estaMantenimiento : "Post-condición de wait() violada";
-        this.ambulanciaState.solicitudMantenimiento(); //Delega el estado
-        if (this.getEstadoString().equals("En taller")) {
+        if (this.getEstadoString().equals("Disponible")) {
+            this.ambulanciaState.solicitudMantenimiento();
             this.setChanged();
             this.notifyObservers(" El operario mando a la ambulancia a mantenimiento.");
         }
-        else {
+        else if (this.getEstadoString().equals("En taller")) {
             System.out.println(this.getEstadoString());
+            this.ambulanciaState.solicitudMantenimiento();
             this.setChanged();
             this.notifyObservers("La ambulancia esta regresando del taller");
         }
@@ -136,9 +139,12 @@ public class Ambulancia extends Observable {
      */
     public synchronized void retornoAutomatico() throws InterruptedException
     {
+        while ((this.asociado!=null || (this.disponible && !this.estaRegresando) || (!this.disponible && this.estaMantenimiento && !this.estaRegresando))) {
+            wait();
+        }
         this.ambulanciaState.retornoAutomatico();
         this.setChanged();
-        this.notifyObservers("");
+        this.notifyObservers("asdas");
         TiempoMuerto.esperar();
         notifyAll();
     }
@@ -180,5 +186,8 @@ public class Ambulancia extends Observable {
         this.estaMantenimiento=condicion;
     }
 
+    public void setEstaRegresando(boolean condicion){
+        this.estaRegresando=condicion;
+    }
 
 }

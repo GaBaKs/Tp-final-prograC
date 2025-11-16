@@ -12,6 +12,7 @@ public class RegresandoTaller implements IState {
         this.ambulancia.setDisponible(false);
         this.ambulancia.setEstaMantenimiento(true);
         this.ambulancia.setEstadoString("Regresando del taller");
+        this.ambulancia.setEstaRegresando(true);
     }
 
     /**

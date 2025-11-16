@@ -14,6 +14,7 @@ public class Disponible implements IState {
         this.ambulancia.setEstaMantenimiento(false);
         this.ambulancia.setDisponible(true);
         this.ambulancia.setEstadoString("Disponible");
+        this.ambulancia.setEstaRegresando(false);
     }
 
     /**
